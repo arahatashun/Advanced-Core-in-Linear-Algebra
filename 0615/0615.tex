@@ -1,0 +1,216 @@
+$\lambda =\rho (A)$なる固有値は他にどれくらいあるのか．例えば$\fourmatrix{0}{1}{0}{0}$の固有値は1と-1である．
+\subsubsection{周期}
+行列$A$をグラフ$G$に，既約を強連結に対応させる．
+
+\begin{dfn}
+  周期$\sigma$はすべての閉路の長さの最大公約数であり，$\sigma$=1のとき原始的という．
+\end{dfn}
+例えば$A=\fourmatrix{0}{1}{0}{1}$の場合閉路の長さは$1\to 2\to 1$で2であり$\sigma =2$
+
+$A=\fourmatrix{0}{1}{1}{1}$の場合は閉路が$1\to 2\to 1と2\to 2$で$\sigma =1$
+
+$I_k = \{ i\in V| 点1からiは長さl(\equiv k\mod\sigma )で到達可能\}$
+
+\begin{equation}
+  \transpose{P}AP=
+  \begin{array}{rccc}
+    &\overset{I_0}{\leftrightarrow}&\overset{I_1}{\leftrightarrow}&\overset{I_2}{\leftrightarrow}\\
+    I_0 \updownarrow&&&\\
+    I_1 \updownarrow&&&\\
+    I_2 \updownarrow&&&\\
+  \end{array}=
+  \begin{pmatrix}
+    0&A_1 &0\\
+    0&0&A_2\\
+    A_3 &0&0
+  \end{pmatrix}
+\end{equation}
+
+以下では$\sigma =3$とする．
+\begin{align*}
+  Ax&=\rho (A)x\\
+  \begin{pmatrix}
+    0&A_1 &0\\
+    0&0&A_2\\
+    A_3 &0&0
+  \end{pmatrix}
+  \begin{pmatrix}
+    x_1\\
+    x_2\\
+    x_3
+  \end{pmatrix}
+  &=\rho (x)
+  \begin{pmatrix}
+    x_1\\
+    x_2\\
+    x_3
+  \end{pmatrix}\\
+  &\Leftrightarrow
+  \begin{cases}
+    A_1 x_2 =\rho (A)x_1\\
+    A_2 x_3 =\rho (A)x_2\\
+    A_3 x_1 =\rho (A)x_3
+  \end{cases}
+\end{align*}
+
+$\zeta = e^{\frac{2}{3}\pi i}$として
+\begin{equation*}
+  x^{(1)}=
+  \begin{pmatrix}
+    x_1 \\
+    \zeta x_2\\
+    {\zeta}^2 x_3
+  \end{pmatrix},\ \ \
+  x^{(2)}=
+  \begin{pmatrix}
+    x_1\\
+    {\zeta}^2 x_2\\
+    {\zeta}^4 x_3
+  \end{pmatrix}とおくと
+\end{equation*}
+\begin{align}
+  Ax^{(1)}&=
+  \begin{pmatrix}
+    0&A_1 &0\\
+    0&0&A_2\\
+    A_3 &0&0
+  \end{pmatrix}
+  \begin{pmatrix}
+    x_1\\
+    \zeta x_2\\
+    {\zeta}^2 x_3
+  \end{pmatrix}=
+  \begin{pmatrix}
+    A_1 \zeta x_2\\
+    A_2 {\zeta}^2 x_3\\
+    A_3 x_1
+  \end{pmatrix}=
+  \begin{pmatrix}
+    \zeta \rho (A)x_1\\
+    {\zeta}^2 \rho (A)x_2\\
+    {\zeta}^3 \rho (A)x_3
+  \end{pmatrix}=\zeta \rho (A)x^{(1)}\\
+  Ax^{(2)}&=・・・{\zeta}^2 \rho (A)x^{(2)}
+\end{align}
+
+したがって${\zeta}^k \rho (A)\ (k=0,1,\cdots n-1)$は$A$の固有値である．
+
+$\lambda :A$の固有値とすると
+\begin{equation*}
+  (A_1 A_2 A_3 )x_1 = A_1 A_2 (\lambda x_3 )=\cdots {\lambda}^3 x_1
+\end{equation*}
+より周期は1で実はスペクトル半径円上の固有値は$\rho (A_1 A_2 A_3 )$のみである．
+
+伊理「一般線形代数」p.271によると
+\begin{align*}
+  &A\geq 0,\ 既約ならa_{ii}>0 \ ({}^{\forall}i)\\
+  &\lambda\neq\rho (A)がAの固有値\Leftrightarrow |\lambda |<\rho (A)(スペクトル円上のAの固有値は\rho (A)のみ)
+\end{align*}
+
+$Au=\rho (A)u\ \ u>0$とすると
+\begin{equation*}
+  U=
+  \begin{pmatrix}
+    u_1&&&\\
+    &u_2&&\\
+    &&\ddots&\\
+    &&&u_n
+  \end{pmatrix}\ \ \ \hat{A}=U^{-1}AUとする
+\end{equation*}
+\begin{itemize}
+  \item[1]$\lambda$は$\hat{A}$の固有値\\
+  \item[2]$\sum_{j=1}\hat{a_{ij}}=\rho (A)\ \ \ \hat{a_{ij}}=\displaystyle\frac{a_{ij}u_j}{u_i}$\\
+  だから$\sum_{j=1}^n \hat{a_{ij}}=\displaystyle\frac{\sum_{j=1}^n a_{ij}u_j}{u_i}=\frac{{(Au)}_i}{u_i}=\frac{{(\rho (A)u)}_i}{u_i}=\rho (A)$
+\end{itemize}
+
+$\hat{A}$についてGershgorinの定理を使うと$r_i = \sum_{j\neq i}\hat{a_{ij}}=\rho (A)-\hat{a_{ii}}$
+
+円板$|\lambda -\hat{A_{ii}}|\leq r_i$とスペクトル円の交わりは$\lambda =\rho (A)$のみである．
+\begin{itemize}
+  \item[系1]$A>0$(正行列のみ)$\Rightarrow$スペクトル同士の固有値は$\rho (A)$のみ\\
+  \item[系2]$a=1\Rightarrow$スペクトル同士の固有値は$\rho (A)$のみ
+\end{itemize}
+
+系2の証明は以下のとおりである．
+
+$a=1\Rightarrow$十分に大きなすべての$m$について$A^m >0$
+
+$\lambda$が$A$の固有値で$|\lambda |=\rho (A)$ならば${\lambda}^m$は$A$の固有値で$|{\lambda}^m |={\rho (A)}^m=\rho (A^m )$
+
+系1を$A^m$に適用すると${\lambda}^m =\rho (A^m )={\rho (A)}^m$であり$m$は十分大きなすべての数を動くので$\lambda =\rho (A)$
+\section{整数行列}
+\subsection{単摸(ユニモジュラー行列)}
+$A=(a_{ij})\ \ \ a_{ij}\in\mathbb{Z}$\ \ \ いま$Ax=b$を解くことを考える．
+\begin{align*}
+  &{}^{\exists}x\in\realnspace{n}\Rightarrow \rank{[A|b]}=\rank{A}\\
+  &{}^{\exists}x\in{\mathbb{Z}}^n \Rightarrow ?
+\end{align*}
+\begin{dfn}
+  $Q:n\times n$整数行列が単摸$\Leftrightarrow\det Q\in {1,-1}$
+\end{dfn}
+\begin{dfn}
+  $Q:n\times n$整数行列が完全単摸$\Rightarrow Q$は任意の正方部分行列$C$について$\det C\in {0,1,-1}$
+\end{dfn}
+
+$Q:$整数行列の時以下はすべて同値．
+\begin{itemize}
+  \item[(1)]$Q$が単摸行列\\
+  \item[(2)]$Q^{-1}$が整数行列\\
+  \item[(3)]$x$が整数ベクトル$\Leftarrow Qx$が整数行列\\
+  \item[(4)]$Q$が整数行列に対する列基本変形を表す行列の積\\
+  \item[(5)]$Q$が整数行列に対する行基本変形を表す行列の積
+\end{itemize}
+\begin{itemize}
+  \item[(1)$\to$(2)]$Q^{-1}=\displaystyle\frac{余因子行列}{\det Q}$\\
+  \item[(2)$\to$(1)]$QQ^{-1}=I$の行列式を考えて$\det Q\det Q^{-1}=1$\ \ \ いま$Q^{-1}$が整数行列なので$\det Q^{-1}\in\mathbb{Z}$から$\det Q=1,-1$\\
+  \item[(2)$\to$(3)]$Qx\in{\mathbb{Z}}^n $について$y=Qx$とおくと$x=Q^{-1}y\in{\mathbb{Z}}^n$
+\end{itemize}
+
+$\realnspace{1}$の場合の列基本変形は
+\begin{itemize}
+  \item ある列を$\alpha$倍
+  \item 2つの列を入れ替える
+  \item ある列$\times\alpha$を他の列に加える
+\end{itemize}
+
+\hypertarget{basictrans}{$\mathbb{Z}$}の場合は
+\begin{itemize}
+  \item ある列を-1倍
+  \item 2つの列を入れ替える
+  \item ある列の整数倍を他の列に加える
+\end{itemize}
+\subsection{エルミート標準形}
+$m\times n$行列$A$のフルランク．整数行列．$\rank A=m$ ${}^{\exists}Q$を単摸行列として
+\begin{equation*}
+  AQ=
+  \begin{pmatrix}
+    \begin{array}{ccc|}
+      {\beta}_{11}&&0\\
+      \vdots&\ddots&\\
+      {\beta}_{m1}&&{\beta}_{mn}
+    \end{array}0
+  \end{pmatrix}
+\end{equation*}
+
+下三角${\beta}_{ij}=0(i<j)$で非負${\beta}_{ij}\leq 0,{\beta}_{ii}>0$行方向に見たときに対角項が最大${\beta}_{ii}>{\beta}_{ij}(i>j)$
+
+\begin{thm}
+  任意の単摸行列は列基本変形の積
+\end{thm}
+
+単位行列$I$に列基本変形を施して$A$になるならば$A$は単摸行列(列基本変形は$\det$を符号以外変えない)．また実は単摸行列に列基本変形を施せばエルミート標準形になることを示す．
+
+一つの行に着目する:$
+\begin{array}{|c|}
+  \hline
+  a_1 a_2 \cdots a_n\\\hline
+\end{array}
+$
+\begin{itemize}
+  \item[1]いくつかの列を-1倍して$a_1 \cdots a_n \geq 0$とする．
+  \item[2]列を入れ替えて$a_1 \geq a_2 \geq \cdots a_n \geq 0$とする．\\
+  このとき$a_1 >0$である，なぜなら$a_1 =0$だとすべての行が0で行フルランクに反してしまうから．
+  \item[3]列を互いに引き算する．$a_i = a_j q_i +r_i (a_i \geq a_j でありq_i \in\mathbb{Z}>0でr_i は余り)$を計算し$a_i =r_i$にして2に戻ることを繰り返す．
+\end{itemize}
+
+もし$a_2 \neq 0$ならば$a_1 -a_2$が可能でありいつかは$a_2 =0$になる．それを他の行でも同じことをする．

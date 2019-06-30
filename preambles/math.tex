@@ -1,0 +1,43 @@
+\usepackage{mathtools, amssymb, amsthm, mathrsfs, bbm,nccmath}
+\usepackage{bm}
+
+
+\usepackage{siunitx, physics}
+%http://texblog.net/latex-archive/maths/amsmath-matrix/
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+% set up for siunitx
+\sisetup{%
+	%detect-family = true,
+	detect-inline-family = math,
+	detect-weight = true,
+	detect-inline-weight = math,
+    %input-product = *,
+    quotient-mode = fraction,
+	fraction-function = \frac,
+	inter-unit-product = \ensuremath{\hspace{-1.5pt}\cdot\hspace{-1.5pt}},
+	per-mode = symbol,
+	product-units = single,
+	}
+   
+% hack to allow empheq environment to be used with fleqn in force only locally
+\makeatletter
+\@fleqntrue
+\usepackage{empheq}
+\newenvironment{Empheq}
+{\@fleqntrue\empheq[left=\empheqlbrace]
+{align}}{\endempheq}
+\@fleqnfalse
+\makeatother
+\everydisplay{}
+
+% number equations only when they are referred to in the text
+\mathtoolsset{showonlyrefs=true}
+% 数式番号を節番号とセットにする
+\numberwithin{equation}{section}
+\usepackage{ascmac}

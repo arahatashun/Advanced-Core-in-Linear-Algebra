@@ -1,0 +1,97 @@
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}%mathbbに必要
+\usepackage{mathtools}%\absを使うのに必要
+
+
+\usepackage{fancybox}%四角とかで囲うように必要
+\usepackage{ascmac}%タイトル付きの囲みのために必要
+\usepackage{ifthen}
+\usepackage{color}
+\usepackage{bbm}
+
+%%%%%%%%%%記法(general)
+\newcommand{\const}{\mathrm{const.}}%定数項
+\newcommand{\bvector}[1]{\boldsymbol{#1}}%ベクトルは太字表示
+\newcommand{\cov}[2]{{\mathrm{cov}}\left( #1 , #2\right) }%共分散
+\newcommand{\evaluesuffix}[2]{{{\mathbb{E}}\left[ #1\right]}_{#2}}%期待値に添え字をつける
+\newcommand{\evalue}[1]{{\mathbb{E}}\left[ #1\right]}%期待値
+\newcommand{\entropy}[1]{{\mathbb{H}}\left[ #1\right]}%エントロピー
+\newcommand{\kldivergence}[2]{{\mathrm{KL}}\left[ {#1}||{#2}\right]}%KLダイバージェンス
+\newcommand{\estimatedvalue}[1]{\hat{#1}}%推定値
+\newcommand{\bicombination}[2]{{}_{#1}C_{#2}}%mCnみたいな組み合わせ
+\newcommand{\diff}{\mathrm{d}}%roman style d
+\newcommand{\datad}{\mathcal{D}}%ベイズ推論での観測データD
+\newcommand{\unobserved}[1]{{#1}_{\ast}}%ベイズ推論で未観測のデータ
+\newcommand{\realnspace}[1]{%実n次元空間
+%\if #1==1
+%\mathbb{R}\else{
+%{\mathbb{R}}^{#1}
+%}\fi
+\ifthenelse{\equal{#1}{1}}{\mathbb{R}}{{\mathbb{R}}^{#1}}
+}
+\newcommand{\normsuffix}[2]{{\| {#1}\| }_{#2}}%#1をノルム表記し#2を添え字につける
+\newcommand{\spacemap}[2]{%R^n \to R^m の写像
+\realnspace{#1}\to\realnspace{#2}
+}
+
+\newcommand{\sign}{\mathrm{sgn}}%符号関数
+\newcommand{\pairing}[2]{\langle {#1},{#2}\rangle}%内積
+\newcommand{\conjugate}[1]{{\overline{#1}}}%複素共役
+\newcommand{\dintegral}[3]{\left[ {#1}\right]_{#2}^{#3}}%#1を区間#2から#3まで定積分する
+%%%%%%%%%%記法(D-SEND)
+\newcommand{\clsuffix}[1]{{C_{L}}_{#1}}%C_Lに添え字(not Roman)
+\newcommand{\cdsuffix}[1]{{C_{D}}_{#1}}%C_Dに添え字(not Roman)
+
+%%%%%%%%%%線形代数
+\newcommand{\matrixsuffix}[3]{%m,n,aのように指定する.m×n行列でa_ij の行列を出力
+\begin{pmatrix}
+{#3}_{1,1}&\cdots&{#3}_{1,j}&\cdots&{#3}_{1,#2}\\
+\vdots&\ddots&\ &\ &\vdots\\
+{#3}_{i,1}&\ &{#3}_{i,j}&\ &{#3}_{i,#2}\\
+\vdots&\ &\ &\ddots&\vdots\\
+{#3}_{#1,1}&\cdots&{#3}_{#1,j}&\cdots&{#3}_{#1,#2}
+\end{pmatrix}
+}
+
+\newcommand{\diagpmatrix}[2]{%D×D対角行列をpmatrixで．#1=D,#2=aでdiag(a_1 ,   ,a_d)をつくる
+\begin{pmatrix}
+{#2}_1 &\ &\ &\ &\ \\
+\ &\ddots&\ &\ &\ \\
+\ &\ &{#2}_{ii}&\ &\ \\
+\ &\ &\ &\ddots&\ \\
+\ &\ &\ &\ &{#2}_{#1}
+\end{pmatrix}
+}
+\newcommand{\onedvec}[3]{({#1}_1 ,\cdots {#1}_{#2},\cdots {#1}_{#3})}%1次元ベクトル.
+%#1:ベクトルの文字．a_i のa
+%#2:真ん中の添え字.a_1 ,…a_i,a_n のi
+%#3:最後の添え字．上でいうところのn
+
+\newcommand{\onedfuncvec}[4]{{#1}({#2}_1),\cdots {#1}({#2}_{#3}),\cdots {#1}({#2}_{#4})}%関数の一次元ベクトル
+\newcommand{\diagmatrix}[2]{{\mathrm{diag}}(#1 ,\cdots ,#2)}%対角行列．最初と最後の成分を指定する．行列のようにpmatrixで表記しない.
+\newcommand{\unitmatrix}{I}%単位行列．大文字のIとあらわすことにする．
+\newcommand{\transpose}[1]{{#1}^{\mathrm{T}}}%転置記号
+\newcommand{\inverse}[1]{{#1}^{-1}}%逆行列
+
+
+%\newcommand{\det}[1]{{\mathrm{det}}{#1}}%行列式
+%%%%%%%%%%微積
+\newcommand{\pdiff}[3]{%偏微分の記法．#1はn階微分,#2はy,#3はxでd^k y/d x^k
+ %\ifnum #1<1%
+ %\text{エラーだよーん} (最初の引数は1以上の整数)\else{%
+ %\ifnum #1=1 \frac{\partial #2}{\partial #3}\else%
+ %\frac{\partial^{#1} #2}{\partial #3^{#1}}\fi
+ %}\fi%
+ \ifthenelse{\equal{#1}{1}}{\frac{\partial #2}{\partial #3}}{\frac{{\partial}^{#1} #2}{\partial {#3}^{#1}}}
+}
+\newcommand{\pdiffdouble}[3]{%二階の偏微分．
+%変数は二種類
+\frac{{\partial}^2 #1}{\partial #2 \partial #3}
+}
+
+\newcommand{\elementinbox}[1]{%
+\begin{array}{|c|}
+  \hline
+  {#1}\\\hline
+\end{array}}

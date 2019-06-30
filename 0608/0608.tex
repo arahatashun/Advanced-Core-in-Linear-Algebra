@@ -1,0 +1,114 @@
+\subsection{Hall-Oreの定理}
+$\Gamma (X)=\{ j\in V| {}^{\exists}i\in X:(i,j)\in E\} (\Gamma :2^U \to 2^V )$
+\begin{equation*}
+  \max |M|=\min_{X\subseteq U}(|\Gamma (X)|-|X|)+|U|
+\end{equation*}
+
+Hall-Oreの定理を証明する．$U$のなかで$X$以外の残りを$A,\Gamma (X)=B$と表記する．
+\begin{align*}
+  |A|+|X|&=|U|\\
+  |B|&=|\Gamma (X)|\\
+  |A|+|B|&=|\Gamma (X)|-|X|+|U|
+\end{align*}
+ここで左辺はカバーでありKoningの定理より$\max |M|=\min (|A|+|B|)$なので示された．
+
+また系$|U|=|V|$のとき以下も成り立つ．
+\begin{equation*}
+  完全マッチングが存在する\Leftrightarrow {}^{\exists}X \subseteq Uに対して|\Gamma (X)|\geq |X|
+\end{equation*}
+以下証明を記す．$|M|=|U|$ならば完全マッチングであり
+\begin{equation*}
+  0\geq \max |M|-|U|=\min (|\Gamma (X)|-|X|)
+\end{equation*}
+したがって$|\Gamma (X)|-|X|\geq 0({}^{\forall}X\in U)$ならば$|\Gamma (X)|-|X|=0$
+\section{非負行列}
+\begin{dfn}
+  $A$が非負行列$\Leftrightarrow$要素ごとに$a_{ij}\geq 0であり，このときA\geq 0$とかく
+\end{dfn}
+\begin{dfn}
+  $A$が正行列$\Leftrightarrow a_{ij}>0$
+\end{dfn}
+
+たとえばマルコフ連鎖を考えると推移行列は非負である．
+\begin{align*}
+  &p_{ij}\geq 0({}^{\forall}i,j)\\
+  &\displaystyle\sum_{j=1}^n p_{ij}=1 ({}^{\forall}i)
+\end{align*}
+\begin{dfn}
+  $A$が確率行列$\Leftrightarrow A\geq 0かる\displaystyle\sum_{j=1}^n a_{ij}=1({}^{\forall}i)$
+\end{dfn}
+\begin{dfn}
+  $A$が二重確率行列$\Leftrightarrow Aも\transpose{A}も確率行列$
+\end{dfn}
+\subsection{Birkhoff-von Neumannの定理}
+\begin{thm}
+  任意の二重確率行列は置換行列の凸結合(重み$\geq 0$,重みの和=1)で表せる．
+\end{thm}
+置換行列とは各行各列にちょうど一個だけ1を持ち残りはすべて0の行列であり，完全マッチングに対応している．
+
+証明は$A$の非ゼロ要素数についての帰納法で行う．グラフの枝の数を$v$とする．
+
+$v=n$のとき$A$自身が置換行列である．
+
+一般に$|\Gamma (X)|\geq |X|({}^{\forall}x\subseteq U)$のとき完全マッチングが存在する．
+\begin{align*}
+  |\Gamma (X)|=\displaystyle\sum_{j\in \Gamma (X)}1&=\sum_{j\in\Gamma (X)}(\sum_{i=1}^n a_{ij})(列和が1なので)\\
+  &\geq \displaystyle\sum_{j\in\Gamma (X)}(\sum_{i\in X}a_{ij})\\
+  &=\displaystyle\sum_{i\in X}\sum_{j\in\Gamma (X)}a_{ij}\\
+  &=\displaystyle\sum_{i\in X}\sum_{j=1}^n a_{ij}\\
+  &=\displaystyle\sum_{i\in X}1(行和が1なので)\\
+  &=|X|
+\end{align*}
+
+$M:$完全マッチングを選ぶと置換行列$P_M$が対応する．$\mu :\min_{i,j\in M}a_{ij}(a_{ij}\neq 0)$とする．
+
+$\tilde{A}=A-\mu P_M とおくと\tilde{A}の行和列和=1-\mu$である．$(\tilde{A}の非ゼロ数)\leq (Aの非ゼロ数)-1$であり以下のように$\tilde{A}$が凸結合で表せると仮定する．すると$A$も凸結合で表せる．
+\begin{align*}
+  \displaystyle\frac{1}{1-\mu}\tilde{A}&=\sum_{i}{\alpha}_i P_i (凸結合)\\
+  A&=\tilde{A}+\mu P_M\\
+  &=\displaystyle\sum_i (1-\mu ){\alpha}_i P_i +\mu P_M
+\end{align*}
+\subsection{既約な行列の定理}
+\begin{thm}
+  $A\geq 0$で$A$が既約なら${(I+A)}^{n-1}>0$(正方行列)
+\end{thm}
+
+${(I+A)}^{n-1}x>0\ {}^{\forall}x\geq 0(x\neq 0)を示せばよい．$
+
+$x_{k+1}=(I+A)x_k (x_0 =x)$とすると$x_k \to x_{k+1}でゼロ要素数が減ることを示す．$
+\begin{align*}
+  &x_k =
+  \begin{array}{|c|}
+     \hline
+     \alpha\\\hline
+     0\\\hline
+  \end{array}(\alpha >0)\ \ \ A=
+  \begin{array}{|c|c|}
+    \hline
+    A_{11} & A_{12}\\\hline
+    A_{21} & A_{22}\\\hline
+  \end{array}\\
+  &x_{k+1}=
+  \begin{array}{|c|}
+     \hline
+     \beta\\\hline
+     \gamma\\\hline
+  \end{array}=
+  \begin{array}{|c|}
+    \hline
+    A_{11} \alpha\\\hline
+    A_{21} \alpha\\\hline
+  \end{array}
+\end{align*}
+
+$A_{11}\geq 0,\alpha >0より\beta >0$\\
+$A$は既約なので$A_{21}\neq 0,\alpha >0よりA_{21}\alpha \neq 0$なので($x_{k+1}$のゼロの数)$<$($x_k$のゼロの数)
+\subsection{Perron-Frobeniusの定理}
+$A\geq 0$で既約としスペクトル半径は$\rho (A)=\max |\lambda |(\lambda :固有値)$である．
+\begin{thm}
+  \begin{itemize}
+    \item $\rho (A)$は固有値\\
+    \item $\rho (A)$は単純固有値(重複度=1)\\
+    \item $Ax=\lambda x$の$x>0$
+  \end{itemize}
+\end{thm}

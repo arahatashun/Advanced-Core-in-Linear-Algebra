@@ -1,0 +1,146 @@
+$Ax=b$の$\mathbb{Z}$上での可解性について考える．
+\begin{thm}
+  $A:m\times n$整数行列で$\rank{A}=m$とすると以下はすべて同値である．
+\end{thm}
+\begin{itemize}
+  \item[(1)]${}^{\forall}b\in{\mathbb{Z}}^m$に対して${}^{\exists}x\in{\mathbb{Z}}^n :Ax=b$\\
+  \item[(2)]$\transpose{y}A\in{\mathbb{Z}}^n \Rightarrow y\in{\mathbb{Z}}^m$\\
+  \item[(3)]$A$の行列式因子$g_k (A)\cdots k$次の小行列式の最大公約数として，$g_m (A)=1$\\
+  \item[(4)]$A$のエルミート標準形=$[I_m |0]$
+\end{itemize}
+
+(4)を基準に見ていく．
+
+まず(1)について．$Q$を単摸行列でエルミート標準形として$Ax=b\Leftrightarrow AQ\inverse{Q}x=b$
+
+先週より$x\in{\mathbb{Z}}^n \Leftrightarrow\inverse{Q}x\in{\mathbb{Z}}^n (4\to 1)$なので$A$をエルミート標準形としてよい．
+
+${}^{\forall}b\in{\mathbb{Z}}^m$に対して
+\begin{equation}
+  \begin{tabular}{|c|c|}
+    \hline
+    \backslashbox{$I$}{0}&0\\
+    &\\\hline
+  \end{tabular}\
+  \begin{array}{|c|}
+    \hline
+    \\
+    x\\
+    \\\hline
+  \end{array}=
+  \begin{array}{|c|}
+    \hline
+    \\
+    b\\
+    \\\hline
+  \end{array}
+\end{equation}
+このとき$i(>1)$行目で
+\begin{equation}
+  \begin{tabular}{|cc|c|}
+    \hline
+    \backslashbox{$I$}{0}&&0\\\hline
+    &\backslashbox{a}{}&\\\hline
+    &&\\\hline
+  \end{tabular}\
+  \begin{array}{|c|}
+    \hline
+    \\
+    x\\
+    \\\hline
+  \end{array}=
+  \begin{array}{|c|}
+    \hline
+    0\\
+    \vdots\\
+    b_i\\
+    \vdots\\
+    0
+    \\\hline
+  \end{array}
+\end{equation}
+$1～i-1$行は解けて$x=
+\begin{array}{|c|}
+  \hline
+  0\\
+  \vdots\\
+  x_i\\
+  \vdots\\
+  \ast
+  \\\hline
+\end{array}\to ax_i =b_i \in\mathbb{Z}$なので$a=1$
+
+次に(2)についてみてみる．$\transpose{y}A\in{\mathbb{Z}}^n \Leftrightarrow\transpose{y}AQ\in{\mathbb{Z}}^n$($Q$は単摸行列)なので$A$をエルミート標準形としてよい．
+
+このとき(2)$\Leftrightarrow{\beta}_{11}={\beta}_{22}=\cdots{\beta}_{mm}=1$を示す．
+
+$\Leftarrow$は明らかである．
+
+$\Rightarrow{\beta}_{ii}\neq 1$となる最初の行($k$行)に注目する．
+
+\begin{align*}
+  &A=
+  \begin{tabular}{|cc|c|}
+    \hline
+    \backslashbox{$I$}{0}&&0\\\hline
+    ${\beta}_{k1}{\beta}_{k2}\cdots$&\backslashbox{${\beta}_{kk}$}{}&\\\hline
+    &&\\\hline
+  \end{tabular}\\
+  &\transpose{y}=
+  \begin{array}{|c|c|c|c|c|}
+    \hline
+    -{\beta}_{k1}/{\beta}_{kk}&-{\beta}_{k2}/{\beta}_{kk}&\cdots&1/{\beta}_{kk}&0\\\hline
+  \end{array}
+\end{align*}
+とおくと$\transpose{y}A=[0,0\cdots 1,0\cdots 0]$となって$\transpose{y}A\in{\mathbb{Z}}^n$であるが$y\notin{\mathbb{Z}}^n$
+
+次に(3)について．
+
+準備として$g_k (A)$は$A$の$\mathbb{Z}$型の\hyperlink{basictrans}{列基本変形}で不変である．
+
+$A$に対して$\alpha=1～k$列の小行列式で$\beta=1～k-1,j$列の小行列式とし$A$の$j$列を$i$列に加えて$A'$とする．
+
+$A'$に対して$1～k-1,j$列の小行列式$=b$,$1～k$列の小行列式を$a'$とする．Laplace展開を考えると($a_i$に関する展開)+($a_j$に関する展開)なので$a'=a+b$
+
+準備より$Q$が単摸なら$g_n (A)=g_m (AQ)$なので$A$をエルミート標準形としてよい．$g_m (A)=1\Leftrightarrow{\beta}_{11}=\cdots ={\beta}_{mm}=1$
+\subsection{Smith標準形}
+$A\in{\mathbb{Z}}^{m\times n},\ \rank{A}=r,\ {}^{\exists}P,Q$を単摸行列とする．
+\begin{equation}
+  PAQ=
+  \begin{array}{|c|c|}
+    \hline
+    \begin{array}{ccc}
+      {\alpha}_1&&\\
+      &\ddots&\\
+      &&{\alpha}_r
+    \end{array}&0\\\hline
+    0&0\\\hline
+  \end{array}
+\end{equation}
+
+${\alpha}_1 >0,{\alpha}_2 >0\cdots {\alpha}_r >0$であり${\alpha}_1 |{\alpha}_2 \cdots |{\alpha}_r ({\alpha}_1 は{\alpha}_2 を割り切る)$
+
+このとき$g_k (A)=g_k (PAQ)={\alpha}_1 \cdots{\alpha}_k$
+
+Smith標準形の作り方を述べる．まず$\min\{ |a_{ij}|i=1\cdots m,\ j=1\cdots n\ a_{ij}\neq 0\}$なる$(i,j)$に注目して$a_{ij}$を基本変形で(1,1)にもってくる．
+
+次に列基本変形で$0\leq a_{1j}<a_{11} (j=2\cdots n)$とする．$a_{ij}=q_j a_{11}+r_j (q_j \in\mathbb{Z})$として${a_{ij}}^{'}=r_j$とする．$a_{ij}$を$a_{11}$で割り算して余りで更新していく．これを続けて最小($\neq 0$)になった$a_{ij}$を(1,1)にもってくる．そうするといつかは以下のようになる．
+\begin{equation}
+  \begin{array}{|cccc}
+    \hline
+    a_{11}&0&\cdots&0\\\hline
+    &&&\\
+    &&&
+  \end{array}
+\end{equation}
+
+同じことを行基本変形でも行うと以下のようになる．
+\begin{equation}
+  \begin{array}{c|ccc}
+    a_{11}&0&\cdots&0\\\hline
+    0&&&\\
+    \vdots&&a_{11}の倍数&\\
+    0&&&
+  \end{array}
+\end{equation}
+もし$a_{11}$の倍数でないなら$a_{ij}\to a_{ij}/a_{11}$の基本変形ができるので．

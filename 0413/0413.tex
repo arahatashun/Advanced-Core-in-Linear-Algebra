@@ -1,0 +1,74 @@
+\newcommand{\fourmatrix}[4]{\begin{pmatrix}
+  #1 & #2 \\
+  #3 & #4
+\end{pmatrix}}
+\section{行列と行列式}
+\subsection{行列式の定義}
+正方行列$A(n\times n行列)=(a_{ij})$について行列式の定義は以下．
+\begin{equation}
+  \det{A}=\displaystyle\sum_{\sigma\in {\&}_n}\sign (\sigma )\prod_{i=1}^n a_{i \sigma (i)}
+\end{equation}
+ここで${\&}_n$は$n!$個の置換，$\sign (\sigma )={(-1)}^{交差数}$
+\subsection{行列式の定義からわかること}
+$A=[a_1 ,a_2 ,\cdots a_n ]$列ベクトルで見ることにする．$a_i$ は$i$次元縦ベクトル
+\begin{itemize}
+  \item[1] $\det I_n =1$\\
+  \item[2] $\det (a_1 ,a_2 ,\cdots \lambda a_k \cdots a_n )=\lambda\det A$\\
+  \item[3] $\det (a_1 ,a_2 ,\cdots a_k +b \cdots a_n )=\det A +\det (a_1 ,a_2 ,\cdots b \cdots a_n )$\\
+  \item[4] $\det (a_1 ,a_2 ,\cdots a_k \cdots a_l \cdots a_n )=-\det (a_1 ,a_2 ,\cdots a_l \cdots a_k \cdots a_n )(k<l)交差が1回変わるので$\\
+  \item[5] $\det (a_1 ,a_2 ,\cdots 0\cdots a_n )=0(\because 2)$\\
+  \item[6] $\det (a_1 ,a_1 ,\cdots a_n )=0(\because 4)$\\
+  \item[7] $\det (a_1 ,a_2 ,\cdots a_k +\lambda a_l \cdots a_n )=\det A(\because 3,6)列基本変形について不変$\\
+  \item[8] $\det (AB)=\det A\det B$\\
+  \item[9] $\det \fourmatrix{A}{0}{B}{C}=\det A\det C$\\
+  \item[10] $\det \fourmatrix{A}{0}{I}{B}=\det\fourmatrix{I}{A}{0}{I}\fourmatrix{-AB}{0}{0}{I}\fourmatrix{I}{0}{B}{I}\fourmatrix{0}{I}{I}{0} \det (AB)=\det (-AB){(-1)}^n$
+\end{itemize}
+\subsection{Cramerの公式}
+正方行列$A(n\times n)$について$Ax=b$の公式．
+\begin{equation}
+  \det A\neq 0のとき\ \ \ x_j =\displaystyle\frac{\det (a_1 a_2 \cdots b\ a_n )}{\det A}
+\end{equation}
+$\because (a_1 a_2 \cdots a_n )\begin{pmatrix}
+  1&\ &\ &\ &\ &\ &0\\
+  \ &\ddots&\ &\ &\ &\ &\ \\
+  \ &\ &1&\ &\ &\ &\ \\
+  \ &\ &\ &x&\ &\ &\ \\
+  \ &\ &\ &\ &1&\ &\ \\
+  \ &\ &\ &\ &\ &\ddots&\ \\
+  0&\ &\ &\ &\ &\ &1
+\end{pmatrix}=(a_1 \cdots b\cdots a_n )$ $Iのj列にxを置く$
+\subsection{余因子}
+$Aのp行とq列をのぞいた行列をMとすると$余因子${\Delta}_{pq}={(-1)}^{p+q}\det M$
+
+行列の余因子展開(Laplace展開)は以下のようになる．
+\begin{align*}
+  \det A&=\displaystyle\sum_{j=1}^n a_{pj}{\Delta}_{pj}(p行について)\\
+  &=\displaystyle\sum_{i=1}^n a_{iq}{\Delta}_{iq}(q列について)
+\end{align*}
+余因子行列の定義は以下
+\begin{align*}
+  &\widehat{A}=(\widehat{a_{ij}})\\
+  &\widehat{a_{ij}}={\Delta}_{ji}\\
+  &\widehat{A}A=\displaystyle\sum_{i=1}^n \widehat{a_{pi}}a_{iq}
+\end{align*}
+$\det Aの第q列の展開配下のようになる$
+\begin{align}
+  &\det A=\displaystyle\sum_{i=1}^n \widehat{a_{pi}}a_{iq}=(\widehat{A}Aの(q,q)成分)\\
+  &p\neq q\ \ \ \displaystyle\sum_{i=1}^n \widehat{a_{pi}}a_{iq}=(\widehat{A}Aの(p,q)成分)
+\end{align}
+したがって
+\begin{align}
+  &\widehat{A}A=\det A\\
+  &\inverse{A}=\inverse{(\det A)}\widehat{A}
+\end{align}
+証明は余因子行列と行列式で検索する．
+\subsection{行列式に関する定理}
+\subsubsection{行列式の恒等式}
+\begin{equation}
+  正則行列Aについて\det\fourmatrix{A}{B}{C}{D}=\det A\det (D-C\inverse{A}B)
+\end{equation}
+証明は以下の恒等式を見れば明らか
+\begin{equation}
+  \fourmatrix{I}{0}{-C\inverse{A}}{I}\fourmatrix{A}{B}{C}{D}=\fourmatrix{A}{B}{0}{D-C\inverse{A}B}
+\end{equation}
+\subsubsection{Binet-Cauchyの公式}

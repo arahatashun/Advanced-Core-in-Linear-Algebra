@@ -1,0 +1,32 @@
+\documentclass[dvipdfmx, fleqn, uplatex,a4paper]{jsarticle}
+\input{preambles/preamble}
+
+\usepackage{mymacro}%自作のマクロ集める
+\newtheorem{dfn}{定義}
+\newtheorem{thm}{定理}
+\usepackage{here}
+\usepackage{slashbox}
+
+\makeatletter
+  \renewcommand{\theequation}{\arabic{section}.\arabic{subsection}.\arabic{equation}}
+  \@addtoreset{equation}{section}
+\makeatother
+
+
+\title{線形数理要論}
+\author{H.Karino}
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+\input{0413/0413}
+\input{0420/0420}
+\input{0427/0427}
+\input{0511/0511}
+\input{0518/0518}
+\input{0608/0608}
+\input{0615/0615}
+\input{0622/0622}
+\input{0629/0629}
+\input{0713/0713}
+\end{document}

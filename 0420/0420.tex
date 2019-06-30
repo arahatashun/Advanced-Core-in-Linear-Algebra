@@ -1,0 +1,45 @@
+\section{階数(ランク)}
+\subsection{ランクの定義}
+$A(m\times n行列)$について
+\begin{itemize}
+  \item[1] 部分行列が正則であるような最大のサイズ\\
+  \item[2] 1次独立な行，列ベクトルの最大の数\\
+  \item[3] $A:\spacemap{n}{m}$として像空間の次元$\dim (\mathrm{Im}A)$\\
+  \item[4] $A:\spacemap{n}{m}$として核の余次元
+\end{itemize}
+ランクはトラス構造の安定性やグラフの剛性の解析に使う．
+\subsection{ランクの性質}
+\begin{itemize}
+  \item[1] $r(AB)\leq \min\{ r(A),r(B)\}$\\
+  \item[2] $S,T$が正則行列だとすると$r(A)=r(SAT)$\\
+  \item[3] $r([A:B])\leq r(A)+r(B)$転置をとって縦に連結しても同様．\\
+  \item[4] $r\left(\fourmatrix{A}{B}{C}{0}\right)\geq r(B)+r(C)$\\
+  \item[5] $r(A+B)\leq r(A)+r(B)$\\
+  \item[6] $r(ABC)\geq r(AB)+r(BC)-r(B)$
+\end{itemize}
+\subsection{ランクの性質の証明}
+1の証明について．
+
+Binet-Cauchyの定理$\det (AB)=\displaystyle\sum_{J}\det A[J]\det B[J]$
+
+2の証明について．
+
+$r(SAT)\leq r(A)$かつ$r(A)=r(\inverse{S}(SAT)\inverse{T})\leq r(SAT)$より
+
+3の証明について．
+
+$r([A:B])$について$A,B$のなかに従属している縦ベクトルがあるかもしれないので．
+
+4の証明について．
+
+4の証明について．
+
+$\fourmatrix{A}{I}{B}{-I}\xrightarrow[1行に加える]{第2行を}\fourmatrix{A+B}{0}{B}{-I}\xrightarrow[1列に加える]{第2列をB倍して}\fourmatrix{A+B}{0}{0}{-I}$
+
+$\fourmatrix{A}{I}{B}{-I}$のrank$\leq r(A+B)+m\leq r(A)+r(B)+m$
+
+6の証明について．
+
+$\fourmatrix{B}{BC}{0}{ABC}\xrightarrow{2列-1列\times C}\fourmatrix{B}{0}{0}{ABC}$であり右辺のランクは$r(B)+r(ABC)$
+
+一方で$\fourmatrix{B}{BC}{0}{ABC}\xrightarrow{2行-1行\times A}\fourmatrix{B}{BC}{-AB}{0}\geq r(AB)+r(BC)(4の性質より)$

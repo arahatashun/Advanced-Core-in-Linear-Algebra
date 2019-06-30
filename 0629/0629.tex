@@ -1,0 +1,181 @@
+\section{線形計画法}
+\subsection{双対問題}
+
+以下の問題を考える．
+\begin{align}
+  &{\mathrm{maximize}}\transpose{C}x\\
+  &{\mathrm{subject to}}Ax\leq b,\ x\geq 0
+\end{align}
+
+今制約条件に$\transpose{y}>0$をかけることで$\transpose{y}Ax\leq\transpose{y}b$なのでもし$\transpose{y}Ax\geq\transpose{C}x$ならば$\transpose{C}x\leq\transpose{y}b$なので$\transpose{C}x\leq\transpose{y}b$である．
+\begin{equation*}
+  \begin{array}{cc}
+    主問題&\\
+    {\mathrm{max}}&\transpose{C}x\\
+    {\mathrm{s.t.}}&Ax\leq b\\
+    &x\geq 0
+  \end{array}\leq
+  \begin{array}{cc}
+    双対問題&\\
+    {\mathrm{min}}&\transpose{y}b\\
+    {\mathrm{s.t.}}&\transpose{y}A\geq\transpose{c}\\
+    &y\geq 0
+  \end{array}
+\end{equation*}
+実は符号が成り立つと強双対性で不等号の場合は弱双対性
+\subsection{Farkasの補題}
+\begin{thm}
+  $A,b$がgivenのとき\\
+  \fbox{${}^{\exists}x\geq 0,\ Ax=b$}$\Leftrightarrow$\fbox{${}^{\forall}y\geq 0,\ \transpose{y}A\geq 0\Rightarrow\transpose{y}b\geq 0$}$\Leftrightarrow
+  \begin{array}{c}
+    \transpose{y}b<0\\
+    \transpose{y}A\geq 0
+  \end{array}$が解を持たない．
+\end{thm}
+
+$\Rightarrow$は容易である．左の項を満たす$\hat{x}$を用いて$\transpose{y}b=\transpose{y}(A\hat{x})=(\transpose{y}A)\hat{x}\geq 0({}^{\forall}y:\transpose{y}A\geq 0)$
+
+$\Leftarrow$について．
+\begin{align}
+  (左の項)&\Leftrightarrow\displaystyle\sum_{j=1}^n x_j a_j =b\ \ \ x_j \geq 0\\
+  &\Leftrightarrow b\in{\mathrm{cone}}(a_1 ,a_2 ,\cdots a_n )
+\end{align}
+ここでcone($a_1 ,a_2 $)とは$\bvector{a_1},\bvector{a_2}$のあいだに$\bvector{b}$が存在することを表す．
+
+一方$\transpose{y}a_j \geq 0(j=1,2,\cdots n)\Rightarrow\transpose{y}b\geq 0$
+\begin{thm}{Farkasの補題}
+  \begin{align}
+    \fbox{${}^{\exists}x\geq 0\ \ Ax\leq b$}&\Leftrightarrow y\geq 0,\ \transpose{y}A\geq 0\\
+    &\Leftrightarrow
+    \begin{cases}
+      {}^{\exists}x\geq 0\\
+      {}^{\exists}s\geq 0
+    \end{cases}\ \ \ Ax+s=b\ (sはスラック変数)\\
+    &\Leftrightarrow {}^{\exists}
+    \begin{pmatrix}
+      x\\
+      s
+    \end{pmatrix}\geq 0\ \ \
+    \begin{pmatrix}
+      A&I
+    \end{pmatrix}
+    \begin{pmatrix}
+      x\\
+      s
+    \end{pmatrix}=b\ \ \ 等号なので上の定理のパターン\\
+    &\Leftrightarrow\transpose{y}
+    \begin{pmatrix}
+      A&I
+    \end{pmatrix}\geq 0\Leftrightarrow\transpose{y}b\geq 0
+  \end{align}
+
+\end{thm}
+\subsection{強双対性}
+主問題と双対問題に実行可能解が存在するならば，両者に最適解$x^{\ast},y^{\ast}$が存在し$\transpose{C}x^{\ast}=\transpose{y^{\ast}}b$である．
+
+証明は弱双対性が成り立つので$\transpose{C}x^{\ast}\leq\transpose{y^{\ast}}b$が成り立つから以下を示せばいい．
+\begin{equation*}
+  \fbox{
+  $\begin{array}{c}
+    {}^{\exists}x (x\geq 0,\ Ax\leq b)\\
+    {}^{\exists}y (y\geq 0,\ \transpose{y}A\geq c)
+  \end{array}\ \ \ \transpose{C}x\geq\transpose{y}b$
+  }
+\end{equation*}
+\begin{align}
+  \fbox{\ }&\Leftrightarrow{}^{\exists}\
+  \begin{pmatrix}
+    x\\
+    y
+  \end{pmatrix}\geq 0,\
+  \begin{pmatrix}
+    A&0\\
+    0&-\transpose{A}\\
+    -\transpose{c}&\transpose{b}
+  \end{pmatrix}
+  \begin{pmatrix}
+    x\\
+    y
+  \end{pmatrix}\leq
+  \begin{pmatrix}
+    b\\
+    -c\\
+    0
+  \end{pmatrix}\\
+  &\Leftrightarrow{\mathrm{Farkasの補題}}\fbox{
+  $\begin{array}{c}
+     a:\begin{pmatrix}
+       u\\
+       v\\
+       \theta
+     \end{pmatrix}\geq 0\
+     \begin{pmatrix}
+       \transpose{A}&0&-c\\
+       0&-A&b
+     \end{pmatrix}
+     \begin{pmatrix}
+       u\\
+       v\\
+       \theta
+     \end{pmatrix}\geq 0\\
+     \Downarrow\\
+     b:\ \begin{pmatrix}
+       \transpose{b}&-c&0
+   \end{pmatrix}
+   \begin{pmatrix}
+     u\\
+     v\\
+     \theta
+   \end{pmatrix}\geq 0
+   \end{array}
+  $}を示せばいい．
+\end{align}
+
+\begin{equation*}
+  \begin{cases}
+    a:\ u,\ v,\ \theta\geq 0,\ \transpose{A}u\geq c\theta ,\ Av\leq b\theta\\
+    b:\ \transpose{b}u\geq\transpose{c}v
+  \end{cases}
+\end{equation*}
+$\theta =0$と$\theta >0$で場合分けする．
+
+$\theta >0$のときは
+\begin{equation*}
+  \transpose{b}u\geq \transpose{\left( \displaystyle\frac{1}{\theta}Av\right)}u=\frac{1}{\theta}\transpose{v}\transpose{A}u\geq\frac{1}{\theta}\transpose{v}(c\theta )=\transpose{v}c
+\end{equation*}
+
+$\theta =0$のとき示すべきは$\begin{pmatrix}u\\v\end{pmatrix}$である．
+\begin{align}
+  &\begin{pmatrix}
+    \transpose{u}&\transpose{v}
+  \end{pmatrix}
+  \begin{pmatrix}
+    A&0\\
+    0&-\transpose{A}
+  \end{pmatrix}\geq 0\\
+  \Leftrightarrow &\begin{pmatrix}
+    \transpose{u}&\transpose{v}
+  \end{pmatrix}
+  \begin{pmatrix}
+    b\\
+    -c
+  \end{pmatrix}\geq 0\\
+  \Leftrightarrow &{}^{\exists}\begin{pmatrix}
+    x\\
+    y
+\end{pmatrix}\geq 0\
+\begin{pmatrix}
+  A&0\\
+  0&-\transpose{A}
+\end{pmatrix}
+\begin{pmatrix}
+  x\\
+  y
+\end{pmatrix}\leq
+\begin{pmatrix}
+  b\\
+  -c
+\end{pmatrix}
+\end{align}
+最後の変形はFarkasの補題を用いた．
+

@@ -1,0 +1,21 @@
+%URL, link
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{pxjahyper}
+% set up for hyperref
+\hypersetup{%
+	bookmarksnumbered = true,%
+	hidelinks,%
+	colorlinks = true,%
+	linkcolor = black,%
+	urlcolor = cyan,%
+	citecolor = black,%
+	filecolor = magenta,%
+	setpagesize = false,%
+	}
+
+\pdfstringdefDisableCommands{%
+\renewcommand*{\bm}[1]{#1}%
+% any other necessary redefinitions
+}
