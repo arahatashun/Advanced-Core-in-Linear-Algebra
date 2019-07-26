@@ -1,0 +1,312 @@
+\section{線形システム}
+\subsection{初期値問題}
+\begin{itembox}[l]{線形微分方程式}
+以下の線形微分方程式系を考えると解は$x(t)=e^{tA}x^0 (t\geq 0)$となる．
+\begin{equation}
+  \dot{x}(t)=Ax(t),\ x(0)=x^0 (A\in\realnspace{n\times n})
+\end{equation}
+\end{itembox}
+
+\begin{dfn}{行列の指数関数}
+  $e^A = \displaystyle\sum_{k=0}^{\infty}\frac{1}{k!}A^k$
+\end{dfn}
+\begin{thm}
+  $\lim_{r\to\infty}\displaystyle\sum_{k=0}^r \frac{1}{k!}A^k$は収束する
+\end{thm}
+なぜなら$S_r = \displaystyle\sum_{k=0}^r \frac{1}{k!}A^k$とすると
+\begin{equation}
+  \normsuffix{e^A -S_r}{}=\normsuffix{\displaystyle\sum_{k=r+1}^{\infty}\frac{1}{k!}A^k}{}\leq\sum_{r=k+1}^{\infty}\frac{1}{k!}A^k = e^{\normsuffix{A}{}}-\sum_{k=0}^r \frac{1}{k!}{\normsuffix{A}{}}^k \to 0\ (\normsuffix{PQ}{}\leq\normsuffix{P}{}\normsuffix{Q}{})
+\end{equation}
+\begin{thm}
+\begin{equation}
+    e^{tA}=\int_0^t Ae^{\tau A}\diff\tau +I \text{ したがって, }\displaystyle\frac{\diff}{\diff t}e^{At}=Ae^{tA}=e^{tA}A
+\end{equation}
+\end{thm}
+
+証明は以下．
+\begin{align}
+  \displaystyle\int_0^t Ae^{\tau A}\diff\tau &=\int_0^t A\left( \sum_{k=0}^{\infty}\frac{1}{k!}{(\tau A)}^k\right) \diff\tau\\
+  &=\displaystyle\int_0^t \sum_{k=0}^{\infty}{\tau}^k \frac{1}{k!}A^{k+1}\diff\tau\\
+  &=\displaystyle\sum_{k=0}^{\infty}\frac{t^{k+1}}{k+1}\frac{A^{k+1}}{k!}\\
+  &=\displaystyle\sum_{k=0}^{\infty}\frac{1}{(k+1)!}{(tA)}^{k+1}\\
+  &=\displaystyle\sum_{k'=0}^{\infty}\frac{1}{k'!}{(tA)}^{k'}-I\left( \frac{1}{0!}{(tA)}^0 \right)
+\end{align}
+\subsection{AのJordan標準形}
+\begin{itembox}[l]{Jordan標準形を用いた表現}
+正則行列$S$を用いて$J=\inverse{S}AS$を考えると
+\begin{equation}
+    e^{tA} = Se^{tJ}S^{-1}
+\end{equation}
+\end{itembox}
+
+\begin{align}
+  &\inverse{S}e^{tA}S=\displaystyle\sum_{k=0}^{\infty}\frac{1}{k!}\inverse{S}{(tA)}^k S=\sum_{k=0}^{\infty}\frac{1}{k!}t^k {(\inverse{S}AS)}^k = e^{tJ}\\
+  &e^{tA}=Se^{tJ}\inverse{S}
+\end{align}
+
+$A=\lambda\unitmatrix +J_4 (0)=
+\begin{pmatrix}
+  \lambda&1&0&0\\
+  0&\lambda&1&0\\
+  0&0&\lambda&1\\
+  0&0&0&\lambda
+\end{pmatrix}$を考えてみる．
+\begin{align}
+  e^{tA}&=e^{t\lambda I}e^{tJ_4 (0)}\\
+  &=(e^{t\lambda}\unitmatrix )e^{tJ_4 (0)}
+ \end{align}
+ $J(0)$はべき零.
+ \begin{align}
+  e^{tJ_4 (0)}&=\sum_{k=0}^3 \frac{1}{k!}t^k {J_4 (0)}^k\\
+  &=\unitmatrix +tJ_4 (0)+\displaystyle\frac{1}{2}t^2 {J_4 (0)}^2 +\frac{1}{6}t^3 {J_4 (0)}^3\\
+  &= \begin{bmatrix}
+    1 & t & t^2/2 & t^3/6\\
+    0 & 1 & t & t^2/2\\
+    0 & 0 & 1 & t\\
+    0 & 0 & 0 & 1
+  \end{bmatrix}
+\end{align}
+\subsection{安定性}
+\begin{itembox}[l]{安定性}
+\begin{align}
+    \forall x_0 \in \mathbb{R}^n \quad 
+    & x(t) = e^{tA}x_o \rightarrow 0 \quad (t\rightarrow \infty)\\
+    &\Updownarrow\\
+    e^{t\lambda} \text{が支配的になるので，}&A\text{のすべての固有値について}
+    \mathrm{Re} \lambda < 0
+\end{align}
+これを$A$が安定という．
+\end{itembox}
+\subsection{Lyapunov不等式}
+\begin{itembox}[l]{Lyapunov不等式}
+  $A(n\times n実行列)$が安定\\
+  $\Leftrightarrow \exists Y(n\times n)$について,
+  \begin{align}
+    &Y=\transpose{Y} \succ 0\ (正定値 対称行列)\\
+    &YA+\transpose{A}Y \prec 0\ (負定値)
+  \end{align}
+負定値の場合の不等式をLyapunov不等式という．
+\end{itembox}
+\begin{proof}
+$\Leftarrow$は容易で$\lambda$を$A$の固有値とすると
+\begin{align}
+  &Av=\lambda v(v\neq 0)\\
+  &v^{\ast}\transpose{A}=\overline{\lambda}v^{\ast}\ (共役転置)
+\end{align}
+
+$YA+\transpose{A}Y \prec 0$なので
+\begin{align}
+  &v^{\ast}(YA+\transpose{A}Y)v<0\\
+  &v^{\ast}Y\underbrace{Av}_{\lambda v}+\underbrace{v^{\ast}\transpose{A}}_{\overline{\lambda}v^{\ast}}Yv<0\\
+  &(\lambda +\overline{\lambda})v^{\ast}Yv<0
+ \end{align}
+よって
+\begin{equation}
+     2{\mathrm{Re}}\lambda = \lambda +\overline{\lambda}<0
+      \quad (\because Y \succ 0)
+\end{equation}
+$\Rightarrow$について${\mathrm{Re}}\lambda <0$なので$e^{tA}\to 0(t\to\infty )$である．
+
+正定値実対称行列$Q \succ 0$を用いて以下のように置けばよい．
+\begin{equation}
+  Y=\displaystyle\int_0^{\infty}e^{t\transpose{A}}Qe^{tA}\diff t　
+  \succ 0
+\end{equation}
+というのも
+\begin{align}
+  \frac{\diff}{\diff t}(e^{t\transpose{A}}Qe^{tA})&
+  =e^{t\transpose{A}}Qe^{tA}A+
+  \transpose{A}e^{t\transpose{A}}Qe^{tA}\\
+  \int_0^{\infty}\frac{\diff}{\diff t}(e^{t\transpose{A}}Qe^{tA})dt &=YA+\transpose{A}Y\\
+  \text{左辺は}\left[e^{t\transpose{A}}Qe^{tA}\right]_0^{\infty} &=0-Q = -Q\\
+  -Q &= YA + A^TY \prec 0
+\end{align}
+\end{proof}
+\begin{itembox}[l]{Lyapunov方程式}
+\begin{equation}
+    AX + XA^T = - Q
+\end{equation}
+$A,Q$は実正方行列で，$Q$は正定値対称行列とする
+\begin{enumerate}
+    \item $A$が安定対称ならば解$X$は一意に定まり，正定値対称である．
+    \item 正定値対称な解$X$が存在するならば$A$は安定行列である．
+\end{enumerate}
+\end{itembox}
+\subsection{Sylvester方程式}
+\begin{itembox}[l]{Sylvester方程式}
+$A, B$は正方行列である．
+$A:m\times m$行列，
+$B:n\times n$行列,
+$C:m\times n$行列,
+$ X:m\times n$行列であって
+未知である．
+\begin{equation}
+    AX - XB = C
+\end{equation}
+\end{itembox}
+$X$の要素$x_{ij}$に関して線形であるから，
+この方程式は$mn$個の要素$x_{ij}$を未知数とする線形方程式系であ
+る.これを
+$X=\begin{bmatrix}x_1 |x_2 |\cdots x_n\end{bmatrix} \to \tilde{x}=
+\begin{bmatrix}
+  x_1\\
+  x_2\\
+  \vdots\\
+  x_n
+\end{bmatrix}(mn\times 1行列)$とおく．Sylvester方程式は以下のように書ける．
+\begin{align}
+  \left(
+  \begin{bmatrix}
+    A&&&0\\
+    &A&&\\
+    &&\ddots&\\
+    0&&&A
+  \end{bmatrix}-
+  \begin{bmatrix}
+    b_{11}I_m&b_{21} I_m&0\\
+    b_{12} I_m &b_{22} I_m &&\\
+    &&\ddots&\\
+    0&&&b_{nn} I_m
+  \end{bmatrix}\right) \tilde{x}=
+  \begin{bmatrix}
+    c_1\\
+    c_2\\
+    \vdots\\
+    c_n
+  \end{bmatrix}=\tilde{c}
+\end{align}
+\begin{itembox}[l]{Kronecker積}
+$\otimes$はKronecker積を表し
+\begin{align}
+  &P:m\times n行列,\ \ \ Q:k\times l行列\\
+  &P\otimes Q=
+  \begin{pmatrix}
+    P_{11}Q&P_{12}Q&&P_{1n}Q\\
+    P_{21}Q&P_{22}Q&&\\
+    &&\ddots&\\
+    P_{m1}Q&&&P_{mn}Q
+  \end{pmatrix}
+  \quad (mk \times nl)
+\end{align}
+また以下が成り立つ
+\begin{equation}
+    (AB)\otimes(CD) =
+    (A \otimes C) (B \otimes D)
+\end{equation}
+\end{itembox}
+つまり$(I_n \otimes A-\transpose{B}\otimes I_m )\tilde{x}=\tilde{c}$である．
+\begin{align}
+  &AX-XB=Cが任意のCに対して解を持つ\\
+  \Leftrightarrow&(I_n \otimes A-\transpose{B}\otimes I_m )が正則\\
+  \Leftrightarrow&(I_n \otimes A-\transpose{B}\otimes I_m )が0を固有値に持たない\\
+  \Leftrightarrow&(実は)Aと\transpose{B}が同じ固有値を持たない
+\end{align}
+\begin{itembox}[l]{解の存在}
+Sylvester方程式が任意の$C$に対して一意解をもつための必要十
+分条件は ，$A$と$B$が共通の固有値をもたないことである.
+\end{itembox}
+\begin{proof}
+$\Rightarrow$
+\begin{equation}
+  \begin{cases}
+    Au=\alpha u\\
+    \transpose{B}v=\beta v
+  \end{cases}
+  \ \ \ とするとv\otimes u=
+  \begin{bmatrix}
+    v_1 u\\
+    v_2 u\\
+    \vdots\\
+    v_n u
+  \end{bmatrix}
+\end{equation}
+\begin{align}
+  &(I_n \otimes A)(v\otimes u)=v\otimes (Au)=\alpha (v\otimes u)\\
+  &(\transpose{B}\otimes I_m )(v\otimes u)=(\transpose{B}v)\otimes u=\beta (v\otimes u)
+ \end{align}
+ したがって
+\begin{equation}
+    (I_n \otimes A-\transpose{B}\otimes I_m) (v\otimes u)=
+    (\alpha - \beta )(v\otimes u)
+\end{equation}
+ この式は$\alpha - \beta$が固有値になることを示している．\\
+($\Leftarrow$)
+Jordan標準形およびSchur分解によって
+\begin{align}
+    \exists \quad S \quad (正則行列)\qquad  &
+    S^{-1}AS = m\times m 上三角行列
+    \\
+    \exists \quad T \quad (正則行列) \qquad &
+    T^{-1}BT = n\times n 下三角行列
+\end{align}
+Sylvesterの等式
+\begin{align}
+    & AX -XB = C\\
+    & \Leftrightarrow (S^{-1}AS)(S^{-1}XT)
+    - (S^{-1}XT)(T^{-1}BT) =  S^{-1}CT
+\end{align}
+したがって，$A$は上三角行列，$B$は下三角行列としてよい．
+このとき
+$(I_n \otimes A-\transpose{B}\otimes I_m )$は上三角行列となる．三角行列の固有値は対角成分に等しいので，
+任意の$i,j$に対して$\alpha_{ii}-
+\beta_{jj} \neq 0$ならば，この行列は正則である．
+\end{proof}
+例)
+\begin{align}
+    A &= \begin{bmatrix}
+      a_{11} & a_{12}\\
+      0 & a_{22}
+    \end{bmatrix}\\
+    B &= \begin{bmatrix}
+      b_{11} & 0 & 0\\
+      b_{21} & b_{22} & 0\\
+      b_{31} & b_{32} & b_{33}
+    \end{bmatrix} 
+\end{align}
+このとき対角成分はそれぞれの固有値となる．
+\begin{equation}
+    I_3 \otimes A = \begin{bmatrix}
+      A & &\\
+      & A &&\\
+      &  & A &\\
+    \end{bmatrix}
+\end{equation}
+これは上三角行列となる．
+\begin{equation}
+    B^T \otimes I_2 =
+    \begin{bmatrix}
+      b_{11} I_2 & b_{21}I_2 & b_{31}I_2\\
+      0 &b_{22} I_2 & b_{32}I_2\\
+      0 & 0 & b_{33} I_2
+    \end{bmatrix}
+\end{equation}
+
+したがって，
+$I \otimes A - B^T \otimes I$の対角項は
+$a_{ii} - b_{jj}$が並ぶ．
+よって，$a_{ii} \neq b_{jj} \rightarrow a_{ii}-b_{jj} \neq 0$
+\subsection{Lyapunovv方程式の可解性}
+Lyapunov方程式
+\begin{equation}
+    YA + A^TY + Q = 0
+\end{equation}
+と，Sylvester方程式
+\begin{equation}
+    \bar{A}X - X \bar{B} = C
+\end{equation}
+との対応は，
+\begin{align}
+    \bar{A} & \leftarrow A^T\\
+    \bar{B} & \leftarrow -A
+\end{align}
+\begin{align}
+\text{$\transpose{A}と-A$が同じ固有値を持たない}
+    \Leftrightarrow \forall Q:\mathrm{Lyapuonov}方程式が可解\
+\end{align}
+そこで，$A$が安定であるとする.\\
+\begin{align}
+&\Leftrightarrow \mathrm{Re}\lambda <0となる（A^Tの
+固有値についても同じ）．\\
+&\Rightarrow \transpose{A}と-Aは同じ固有値を持たない．\\
+&\Rightarrow \mathrm{Lyapunov}方程式は一意にとける．
+\end{align}

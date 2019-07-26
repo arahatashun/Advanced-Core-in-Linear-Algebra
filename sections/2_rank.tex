@@ -1,0 +1,50 @@
+\section{階数(ランク)}
+\subsection{ランクの定義}
+$A(m\times n行列)$について
+\begin{itemize}
+  \item[1] 部分行列が正則であるような最大のサイズ\\
+  \item[2] 1次独立な行，列ベクトルの最大の数\\
+  \item[3] $A:\spacemap{n}{m}$として像空間の次元$\dim (\mathrm{Im}A)$\\
+  \item[4] $A:\spacemap{n}{m}$として核の余次元
+\end{itemize}
+ランクはトラス構造の安定性やグラフの剛性の解析に使う．
+\subsection{ランクの性質}
+\begin{itemize}
+  \item[1] $\mathrm{rank}(AB)\leq \min\{ \mathrm{rank}(A),\mathrm{rank}(B)\}$\\
+  \item[2] $S,T$が正則行列だとすると$\mathrm{rank}(A)=\mathrm{rank}(SAT)$\\
+  \item[3] $\mathrm{rank}([A:B])\leq \mathrm{rank}(A)+\mathrm{rank}(B)$転置をとって縦に連結しても同様．\\
+  \item[4] $\mathrm{rank}\left(
+  \begin{bmatrix}
+  A & B\\
+  C & 0
+  \end{bmatrix}
+  \right)\geq \mathrm{rank}(B)+\mathrm{rank}(C)$\\
+  \item[5] $\mathrm{rank}(A+B)\leq \mathrm{rank}(A)+\mathrm{rank}(B)$\\
+  \item[6] \textcolor{red}{Frobenius不等式} $\mathrm{rank}(ABC)\geq \mathrm{rank}(AB)+\mathrm{rank}(BC)-\mathrm{rank}(B)$
+\end{itemize}
+\subsection{ランクの性質の証明}
+1の証明について．
+
+Binet-Cauchyの定理$\det (AB)=\displaystyle\sum_{J}\det A[J]\det B[J]$
+
+2の証明について．
+
+$\mathrm{rank}(SAT)\leq \mathrm{rank}(A)$かつ$\mathrm{rank}(A)=\mathrm{rank}(\inverse{S}(SAT)\inverse{T})\leq \mathrm{rank}(SAT)$より
+
+3の証明について．
+
+$\mathrm{rank}([A:B])$について$A,B$のなかに従属している縦ベクトルがあるかもしれないので．
+
+4の証明について．
+
+4の証明について．
+
+$\fourmatrix{A}{I}{B}{-I}\xrightarrow[1行に加える]{第2行を}\fourmatrix{A+B}{0}{B}{-I}\xrightarrow[1列に加える]{第2列をB倍して}\fourmatrix{A+B}{0}{0}{-I}$
+
+$\fourmatrix{A}{I}{B}{-I}$のrank$\leq \mathrm{rank}(A+B)+m\leq \mathrm{rank}(A)+\mathrm{rank}(B)+m$
+
+6の証明について．
+
+$\fourmatrix{B}{BC}{0}{ABC}\xrightarrow{2列-1列\times C}\fourmatrix{B}{0}{0}{ABC}$であり右辺のランクは$\mathrm{rank}(B)+\mathrm{rank}(ABC)$
+
+一方で$\fourmatrix{B}{BC}{0}{ABC}\xrightarrow{2行-1行\times A}\fourmatrix{B}{BC}{-AB}{0}\geq \mathrm{rank}(AB)+\mathrm{rank}(BC)(4の性質より)$

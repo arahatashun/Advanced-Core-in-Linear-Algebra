@@ -1,0 +1,239 @@
+\section{線形計画法}
+\subsection{双対問題}
+
+以下の問題を考える．
+\begin{align}
+  &{\text{maximize }}\transpose{c}x\\
+  &{\text{subject to }}Ax\leq b,\ x\geq 0
+\end{align}
+
+今制約条件に$\transpose{y}>0$をかけることで$\transpose{y}Ax\leq\transpose{y}b$なのでもし$\transpose{y}Ax\geq\transpose{c}x$ならば$\transpose{c}x\leq\transpose{y}b$なので$\transpose{c}x\leq\transpose{y}b$である．
+\begin{equation}
+  \begin{array}{cc}
+    主問題&\\
+    {\mathrm{max}}&\transpose{c}x\\
+    {\mathrm{s.t.}}&Ax\leq b\\
+    &x\geq 0
+  \end{array}\leq
+  \begin{array}{cc}
+    双対問題&\\
+    {\mathrm{min}}&\transpose{y}b\\
+    {\mathrm{s.t.}}&\transpose{y}A\geq\transpose{c}\\
+    &y\geq 0
+  \end{array}
+\end{equation}
+実はゆるい仮定のもとで符号が成り立つ（強双対性）．
+不等号の場合は弱双対性と呼ぶ．
+\subsection{Farkasの補題}
+\begin{itembox}[l]{Farkasの補題}
+次の2条件は同値
+\begin{enumerate}
+    \item \(Ax=b\)を満たす非負べクトル$x\geq 0$が存在する．
+    \item 任意の実数ベクトル$y$について，$y^T A \geq 0^T$ならば，
+    \(y^T b \geq 0\)である．
+\end{enumerate}
+\end{itembox}
+
+最後の条件はつまり
+ \(\transpose{y}b<0\)
+かつ\(\transpose{y}A\geq 0\)
+が解を持たない．\\
+$\Rightarrow$は容易である．左の項を満たす$\hat{x}$を用いて$\transpose{y}b=\transpose{y}(A\hat{x})=(\transpose{y}A)\hat{x}\geq 0({}^{\forall}y:\transpose{y}A\geq 0)$
+
+$\Leftarrow$について．
+\begin{align}
+  (左の項)&\Leftrightarrow\displaystyle\sum_{j=1}^n x_j a_j =b\ \ \ x_j \geq 0 \quad(a_j\text{は列
+  ベクトル})\\
+  &\Leftrightarrow b\in{\mathrm{cone}}(a_1 ,a_2 ,\cdots a_n )
+\end{align}
+ここで\( b \in \) cone($a_1 ,a_2 $)とは$\bvector{a_1},\bvector{a_2}$のあいだに$\bvector{b}$が存在することを表す．
+条件(1)が不成立のとき,つまり
+$b \not \in \mathrm{cone}(a_1,\cdots,a_n)$
+のときは，ある超平面でCone($A$)と$b$を分離することができる．
+したがって$\transpose{y}a_j \geq 0(j=1,2,\cdots n)\Rightarrow\transpose{y}b\geq 0$.
+したがって$b$は$a_j$のなす錐に含まれる．
+\begin{itembox}[l]{Farkasの補題(2)}
+等号が不等号に変わっていることに注意．次の2条件は同値．
+\begin{enumerate}
+    \item $Ax \leq b$を満たすベクトル$x \geq 0$が存在する．
+    \item 任意の実数ベクトル$y$について，$y \geq 0$かつ$y^T A \geq  0^T $
+    ならば$y^T b \geq 0 $
+\end{enumerate}
+\end{itembox}
+ \begin{align}
+    \fbox{${}^{\exists}x\geq 0\ \ Ax\leq b$}
+    &
+    \Leftrightarrow
+    \fbox{ $ \forall y\geq 0,\ \transpose{y}A\geq 0
+    \Rightarrow y^Tb\geq 0$}
+\end{align}
+\begin{align}
+\because 
+    &\Leftrightarrow
+    \begin{cases}
+      {}^{\exists}x\geq 0\\
+      {}^{\exists}s\geq 0
+    \end{cases}\ \ \ Ax+s=b\ (sはスラック変数)\\
+    &\Leftrightarrow {}^{\exists}
+    \begin{bmatrix}
+      x\\
+      s
+    \end{bmatrix}\geq 0\ \ \
+    \begin{bmatrix}
+      A&I
+    \end{bmatrix}
+    \begin{bmatrix}
+      x\\
+      s
+    \end{bmatrix}=b\ \ \ 等号なので上の補題のパターン\\
+    &\Leftrightarrow
+    \forall y \geq 0,\quad 
+    \transpose{y}
+    \begin{bmatrix}
+      A&I
+    \end{bmatrix}\geq 0\Rightarrow\transpose{y}b\geq 0
+  \end{align}
+
+\subsection{強双対性}
+\begin{itembox}[l]{強双対定理}
+(Primal)
+\begin{align}
+    \text{maximize } c^Tx\\
+    \text{subject to } Ax\leq b \quad x \geq 0
+\end{align}
+(Dual)
+\begin{align}
+    \text{minimize } y^T b\\
+    \text{subject to }y^T A \geq c^T \quad y\geq 0
+\end{align}
+主問題と双対問題に実行可能解が存在するならば，両者に最適解$x^{\ast},y^{\ast}$が存在し
+\begin{equation}
+    \transpose{c}x^{\ast}=\transpose{y^{\ast}}b
+\end{equation}
+である．
+\end{itembox}
+\begin{proof}
+弱双対性が成り立つ
+つまり$\transpose{c}x^{\ast}
+\leq\transpose{y^{\ast}}b$が成り立つので強
+双対性を示す．
+\begin{itembox}[l]{強双対性}
+
+$ {}^{\exists}x (x\geq 0,\ Ax\leq b) , {}^{\exists}y (y\geq 0,\ \transpose{y}A\geq c)$ satisfying
+\begin{equation}
+  \transpose{c}x\geq\transpose{y}b
+\end{equation}
+\end{itembox}
+\begin{align}
+&\Leftrightarrow{}^{\exists}\
+  \begin{bmatrix}
+    x\\
+    y
+  \end{bmatrix}\geq 0,\
+  \begin{bmatrix}
+    A&0\\
+    0&-\transpose{A}\\
+    -\transpose{c}&\transpose{b}
+  \end{bmatrix}
+  \begin{bmatrix}
+    x\\
+    y
+  \end{bmatrix}\leq
+  \begin{bmatrix}
+    b\\
+    -c\\
+    0
+  \end{bmatrix}\\
+  &\Leftrightarrow{\mathrm{Farkasの補題}}\\
+  &\fbox{
+  $\begin{array}{c}
+     a:\begin{bmatrix}
+       u\\
+       v\\
+       \theta
+     \end{bmatrix}\geq 0
+     \quad 
+     \begin{bmatrix}
+       \transpose{A}&0&-c\\
+       0&-A&b
+     \end{bmatrix}
+     \begin{bmatrix}
+       u\\
+       v\\
+       \theta
+     \end{bmatrix}\geq 0\\
+     \Downarrow\\
+     b:\ \begin{bmatrix}
+       \transpose{b}&-\transpose{c} &0
+   \end{bmatrix}
+   \begin{bmatrix}
+     u\\
+     v\\
+     \theta
+   \end{bmatrix}\geq 0
+   \end{array}
+  $}を示せばいい．
+\end{align}
+
+\begin{equation*}
+  \begin{cases}
+    a:\ u,\ v,\ \theta\geq 0,\ \transpose{A}u\geq c\theta ,\ Av\leq b\theta\\
+    b:\ \transpose{b}u\geq\transpose{c}v
+  \end{cases}
+\end{equation*}
+$\theta =0$と$\theta >0$で場合分けする．
+
+$\theta >0$のとき,
+(a) から(b)を導く
+\begin{equation}
+  \transpose{b}u\geq \transpose{\left( \displaystyle\frac{1}{\theta}Av\right)}u=\frac{1}{\theta}\transpose{v}\transpose{A}u\geq\frac{1}{\theta}\transpose{v}(c\theta )=\transpose{v}c
+\end{equation}
+
+$\theta =0$のとき示すべきは
+以下の通り．\\
+\begin{align}
+  &
+  \begin{bmatrix}
+  u\\v
+  \end{bmatrix}\geq 0
+  \quad 
+  \begin{bmatrix}
+    \transpose{u}&\transpose{v}
+  \end{bmatrix}
+  \begin{bmatrix}
+    A&0\\
+    0&-\transpose{A}
+  \end{bmatrix}\geq 0\\
+  \Rightarrow &\begin{bmatrix}
+    \transpose{u}&\transpose{v}
+  \end{bmatrix}
+  \begin{bmatrix}
+    b\\
+    -c
+  \end{bmatrix}\geq 0
+  \end{align}
+  Farkasの補題を用いて，
+主問題の形に戻すと
+  \begin{align}
+  \Leftrightarrow &{}^{\exists}\begin{bmatrix}
+    x\\
+    y
+\end{bmatrix}\geq 0\
+\begin{bmatrix}
+  A&0\\
+  0&-\transpose{A}
+\end{bmatrix}
+\begin{bmatrix}
+  x\\
+  y
+\end{bmatrix}\leq
+\begin{bmatrix}
+  b\\
+  -c
+\end{bmatrix}
+\end{align}
+最後の形から実行可能解を持つならば，
+$C^Tx \geq y^Tb$がなりたつ$x,y$
+が存在する．
+
+\end{proof}

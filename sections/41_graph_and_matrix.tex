@@ -1,0 +1,75 @@
+\setcounter{section}{3}
+\section{グラフと行列}
+$A=(a_{ij})(n\times n行列)$について
+\begin{align}
+  &V=\{ 1,2,\cdots n\}\\
+  &E=\{ (i,j)| a_{ij}\neq 0\}
+\end{align}
+
+\begin{align}
+  Gが強連結(任意の二点間に道がある)
+  &\Leftrightarrow Aが既約\\
+  &\Leftrightarrow PA\transpose{P}(P:置換行列
+  \footnotemark)=
+  \begin{array}{|c|c|}
+    \hline
+    &\\\hline
+    0&\\\hline
+  \end{array}\ にできない
+\end{align}
+\footnotetext{各行各列にちょうど一つだけ 1 の要素を持ち，それ以外は全て0となるような二値正方行列}
+
+2部グラフのマッチングとはいくつかの枝の集合で，
+行同士列同士がぶつからない，
+つまり端点を共有しない枝の集合．
+$M:マッチング$としたとき$\mathrm{argmax}_{M;\mathrm{matching}} |M|$を最大マッチングという．
+
+また，任意の枝$e$に対して,
+$(eの左端点)\in X$または$(eの右端点)\in Y$となる
+$\Leftrightarrow$
+$(X,Y)$を被覆(カバー)という．
+\subsection{Koning-Egervaryの定理}
+\begin{itembox}[l]{Koning-Egervaryの定理}
+\begin{equation}
+  \max_{M:\mathrm{matcing}} |M|=\min_{(X,Y):\mathrm{cover}} (|X|+|Y|)
+\end{equation}
+ここで$M$はマッチングで$(X,Y)$はカバーである．
+\end{itembox}
+この定理からいえることとして
+\begin{itemize}
+  \item[(1)]任意のマッチング$M$と任意のカバー$(X,Y)$に対して$|M|\leq |X|+|Y|$\\
+  $(X,Y)$はカバーであることから，両方ともに属さない枝は存在しない．
+  \item[(2)]あるマッチングとあるカバーに対して$|M|=|X|+|Y|$.このとき最大マッチングである.
+
+\end{itemize}
+
+
+\subsection{Hall-Oreの定理}
+\begin{itembox}[l]{Hall-Oreの定理}
+$U,V$の二部グラフを考える.
+$\Gamma (X)=\{ j\in V| {}^{\exists}i\in X:(i,j)\in E\} (\Gamma :2^U \to 2^V )$
+\begin{equation}
+  \max_{M;\mathrm{matching}} |M|=\min_{X\subseteq U}(|\Gamma (X)|-|X|)+|U|
+\end{equation}
+系.$|U|=|V|$のとき以下も成り立つ．
+\begin{equation}
+  完全マッチングが存在する\Leftrightarrow \forall X \subseteq Uに対して|\Gamma (X)|\geq |X|
+\end{equation}
+\end{itembox}
+\begin{proof}
+$U$のなかで$X$以外の残りを$A, \Gamma (X)=B$と表記する．
+\begin{align}
+  |A|+|X|&=|U|\\
+  |B|&=|\Gamma (X)|\\
+  |A|+|B|&=|\Gamma (X)|-|X|+|U|
+\end{align}
+ここで$(A,B)$はカバーでありKoningの定理より$\max |M|=\min (|A|+|B|)$なので示された．\\
+系については，
+$|M|=|U|$ならば完全マッチングであり
+\begin{equation}
+  0\geq \max |M|-|U|=\min (|\Gamma (X)|-|X|)
+\end{equation}
+したがって$U$の部分集合となるすべての$X$に対して
+$|\Gamma (X)|-|X|\geq 0$.
+\end{proof}
+

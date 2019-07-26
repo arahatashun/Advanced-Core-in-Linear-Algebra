@@ -1,0 +1,309 @@
+\section{過去問}
+\subsection{2018年期末}
+\begin{itembox}[l]{問1}
+$A,B$を$n$次の実対称正定値行列とする．
+$A-B$が半正定値行列であるならば，$
+\det A \geq \det B$が成り立つことを示せ．
+\end{itembox}
+\begin{equation}
+    A - B \succeq 0 \text{なので} A \succeq B
+\end{equation}
+
+$A$,$B$は実対称ゆえ、
+Courant Fisherの定理より
+\begin{equation}
+    \lambda_k(A) \geq \lambda_k(B)
+\end{equation}
+$B$は正定値行列であるので
+\begin{equation}
+    \lambda_k(A) \geq \lambda_k(B) > 0
+\end{equation}
+したがって
+\begin{equation}
+    \Pi_k \lambda_k(A) \geq  \Pi_k \lambda_k(B)
+\end{equation}
+行列式は固有値の積に等しいので
+示された．
+\begin{itembox}[l]{問2}
+行列$A\in \mathbb{R}^{m \times n}, C \in \mathbb{R}^{k\times n}$
+とベクトル$b \in \mathbb{R}^m, d \in \mathbb{R}^k$が与えられてる．
+Farkasの補題または線形計画法の双対定理を用いて．以下の問に答えよ．
+\begin{enumerate}
+    \item 次の条件が同値であることを示せ．
+    \begin{enumerate}
+        \item $Ax \leq b$を満たす実数ベクトル$x$が存在する．
+        \item 任意の非負ベクトル$y\geq 0$について，
+        $A^T y =0$ならば$b^T y\geq 0$である．
+    \end{enumerate}
+    \item 次の条件が同値であることを示せ．
+    \begin{enumerate}
+        \item $Ax \leq b$かつ$Cx<d$を満たす実数ベクトル$x$が存在する．
+        \item 任意の非負ベクトル$y\geq 0,z\geq 0$について，
+        \begin{enumerate}
+            \item $A^T y + C^Tz = 0$ならば，$b^T y + d^T z \geq 0$であり，かつ,
+            \item $A^T y + C^T z = 0$かつ$z\neq 0$ならば$b^T y + d^T z >0$である．
+        \end{enumerate}
+    \end{enumerate}
+\end{enumerate}
+\end{itembox}
+\begin{enumerate}
+
+\item (b)$\Rightarrow$(a).
+(b)の条件は次のように書き直すことができる.
+\begin{equation}
+    \forall y \quad \begin{bmatrix}
+    A^T \\
+    -A^T\\
+    I_m
+    \end{bmatrix}
+    y \geq 0
+    \Rightarrow
+    b^T y \geq 0
+\end{equation}
+Farkas lemmaから
+\begin{equation}
+    \exists x^\ast \geq 0 \quad 
+     \begin{bmatrix}
+    A &
+    -A &
+    I_m
+    \end{bmatrix}x^\ast  = b
+\end{equation}
+任意の$x^\ast \geq 0$に対して,
+実数ベクトル$x$を
+\begin{equation}
+    x =x^\ast_{n1} -  x^\ast_{n2}
+\end{equation}
+とすることで．以下を満たすように構成できる．
+\begin{equation}
+    Ax \leq  \begin{bmatrix}
+    A &
+    -A &
+    I_m
+    \end{bmatrix}x^\ast 
+    =\begin{bmatrix}
+    A &
+    -A &
+    I_m
+    \end{bmatrix}
+    \begin{bmatrix}
+    x^\ast_{n1}\\
+    x^\ast_{n2}\\
+    x^\ast_m
+    \end{bmatrix}
+    = b
+\end{equation}
+(a)$\Rightarrow$(b).非負ベクトル
+$y^T$を(a)に左からかけて，
+\begin{align}
+    y^T Ax &\leq y^T b\\
+    x^T A^T y &\leq b^T y
+\end{align}
+したがって$A^Ty=0$ならば$ b^T y \geq 0$である．
+
+
+\item 
+(a)$\Rightarrow$ (b).
+(a)を転置して，$y\geq 0, z \geq 0$を右からかけると
+\begin{equation}
+    x^T A^T y \leq b^T y \quad x^T C^T z \leq d^T z
+\end{equation}
+足し合わせることで
+\begin{equation}
+    x^T (A^T y + C^Tz) \leq b^T y + d^T z
+\end{equation}
+したがって，(b)(i)が示された．さらに
+先程，$z\geq0 $をかけたところを$z >0$に変えることで，
+\begin{equation}
+     x^T A^T y \leq b^T y \quad x^T C^T z < d^T z
+\end{equation}
+これを足し合わせることで
+\begin{equation}
+ x^T (A^T y + C^Tz) < b^T y + d^T z
+ \end{equation}
+ したがって(b)(ii)が示された．\\
+ (b)$\Rightarrow$(a)
+(b)(i)の条件を書き換えると
+\begin{equation}
+    \forall y \geq 0, \forall z \geq 0\quad
+    \begin{bmatrix}
+    y^T & z^T
+    \end{bmatrix}
+    \begin{bmatrix}
+    A \\
+    C
+    \end{bmatrix}
+    = 0 
+    \Rightarrow
+        \begin{bmatrix}
+    y^T & z^T
+    \end{bmatrix}
+    \begin{bmatrix}
+    b\\
+    d
+    \end{bmatrix}
+    \geq 0
+\end{equation}
+(1)を用いるとこの条件から
+\begin{equation}
+     \begin{bmatrix}
+    A \\
+    C
+    \end{bmatrix}
+    x^\ast \leq    \begin{bmatrix}
+    b\\
+    d
+    \end{bmatrix}
+\end{equation}
+したがって，
+$Ax\leq b$かつ$Cx \leq d$を満たす実ベクトル$x
+$が存在する．
+\end{enumerate}
+\begin{itembox}[l]{問題3}
+$a$を整数とする．方程式
+\begin{equation}
+    \begin{bmatrix}
+    15 & 3 & 6\\
+    50 & 9 & 23
+    \end{bmatrix}
+    \begin{bmatrix}
+    x_1\\
+    x_2\\
+    x_3
+    \end{bmatrix}
+    = 
+    \begin{bmatrix}
+    2 - a\\
+    6 + 2a
+    \end{bmatrix}
+\end{equation}
+が整数解($x_1,x_2,x_3$)を持つような
+$a$を求めよ．また，
+その時の解($x_1,x_2,x_3$)を求めよ．
+\end{itembox}
+Hermite標準形にする
+\begin{align}
+\begin{bmatrix}
+15 & 3 & 6\\
+50 & 9 & 23
+\end{bmatrix}
+\xrightarrow[]{\text{1列と2列を入れ替え}}
+\begin{bmatrix}
+15 & 6 & 3\\
+50 & 23 & 9 
+\end{bmatrix}
+\xrightarrow[]{\text{2列から3列を2倍して引く}}
+\begin{bmatrix}
+15 & 0 & 3\\
+50 & 5 & 9 
+\end{bmatrix}\\
+\xrightarrow[]{\text{2列と3列を入れ替え}}
+\begin{bmatrix}
+15 & 3 & 0\\
+50 & 9 & 5 
+\end{bmatrix}
+\xrightarrow[]{\text{1列から2列を5倍して引く}}
+\begin{bmatrix}
+0 & 3 & 0\\
+5 & 9 & 5 
+\end{bmatrix}\\
+\xrightarrow[]{\text{1列と2列を入れ替え}}
+\begin{bmatrix}
+ 3 & 0 & 0\\
+ 9 & 5  & 5
+\end{bmatrix}
+\xrightarrow[]{\text{3列から2列を引く}}
+\begin{bmatrix}
+ 3 & 0 & 0\\
+ 9 & 5  & 0
+\end{bmatrix}\\
+\xrightarrow[]{\text{1列から2列を引く}}
+\begin{bmatrix}
+ 3 & 0 & 0\\
+ 4 & 5  & 0
+\end{bmatrix}
+\end{align}
+単模行列$V$
+を用いて
+$Ax=b$を$AV(V^{-1})x=b$の形にする．
+単模行列より$V^{-1}x$が整数解のときに
+$x$も整数解となる．
+\begin{align}
+&
+\begin{bmatrix}
+15 & 3 & 6\\
+50 & 9 & 23
+\end{bmatrix}
+\begin{bmatrix}
+-1 & 1 & -1\\
+6 & -5 & 3\\
+0 & 0 & 1
+\end{bmatrix}
+=
+\begin{bmatrix}
+ 3 & 0 & 0\\
+ 4 & 5  & 0
+\end{bmatrix}
+\end{align}
+よって
+\begin{align}
+    \begin{bmatrix}
+ 3 & 0 & 0\\
+ 4 & 5  & 0
+\end{bmatrix}
+\begin{bmatrix}
+ x^\ast_1\\
+  x^\ast_2\\
+   x^\ast_3
+\end{bmatrix}
+=   \begin{bmatrix}
+    2 - a\\
+    6 + 2a
+\end{bmatrix}\\
+ x^\ast_1 = \frac{2-a}{3}\\
+ 4 x^\ast_1 + 5  x^\ast_2 = 6+2a\\
+  x^\ast_2 = \frac{2}{3}(a+1)
+\end{align}
+整数解であるためには
+$2-a$が3でわりきれればよい．
+$k$を整数として
+$2-a = 3k$とすると$a = -3k+2$.
+\begin{align}
+    x^\ast_1 &= k\\
+    x^\ast_2 &= -2k+2
+\end{align}
+$x^\ast_3 = l$という整数とすると
+また$V$から
+\begin{align}
+\begin{bmatrix}
+ x_1\\
+ x_2\\
+ x_3
+\end{bmatrix}
+= V \begin{bmatrix}
+ x^\ast_1\\
+ x^\ast_2\\
+ x^\ast_3
+\end{bmatrix}
+=\begin{bmatrix}
+ -1 & 1 & -1\\
+6 & -5 & 3\\
+0 & 0 & 1
+\end{bmatrix}
+\begin{bmatrix}
+ k\\
+-2k+2\\
+l
+\end{bmatrix}
+\end{align}
+\begin{align}
+    x_1 &= -3k+2-l\\
+    x_2 &= k -2l + 15k- 10 +5l
+    = 16k +3l - 10 
+\end{align}
+まとめると，整数$k,l$を用いて
+\begin{align}
+    x_1 &=  -3k+2-l\\
+    x_2 &= 16k +3l - 10 \\
+    x_3 &= l
+\end{align}

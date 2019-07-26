@@ -1,11 +1,4 @@
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsfonts}%mathbbに必要
-\usepackage{mathtools}%\absを使うのに必要
-
-
 \usepackage{fancybox}%四角とかで囲うように必要
-\usepackage{ascmac}%タイトル付きの囲みのために必要
 \usepackage{ifthen}
 \usepackage{color}
 \usepackage{bbm}
@@ -95,3 +88,8 @@
   \hline
   {#1}\\\hline
 \end{array}}
+
+\newcommand{\fourmatrix}[4]{\begin{pmatrix}
+  #1 & #2 \\
+  #3 & #4
+\end{pmatrix}}

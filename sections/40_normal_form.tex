@@ -1,0 +1,359 @@
+\section{行列の標準形}
+\subsection{対角化}
+$A$が実対称行列$\transpose{A}=A$(Hermite行列$A^H = A$,共役転置)のとき固有値は実数で$n$個存在し，固有ベクトルは直交化できる．
+\begin{equation}
+  \exists 直交行列またはユニタリ行列Qについて\ \ \ Q^{\ast}AQ=
+  \begin{pmatrix}
+    {\lambda}_1 &\ &0\\
+    \ &\ddots&\ \\
+    \ &\ &{\lambda}_n
+  \end{pmatrix}(Q^{\ast}=\transpose{Q}\mathrm{or}\ Q^{H})
+\end{equation}
+このように対角化できる行列はどんな行列か？
+
+\begin{itembox}[l]{正規行列のユニタリ行列による対角化}
+\begin{align}
+    &Aが正規行列\Leftrightarrow A^{\ast}A = AA^{\ast}\\
+    &Aがユニタリ(直交)行列\Leftrightarrow A^{\ast}A=\unitmatrix
+  \end{align}
+  \begin{equation}
+    Aが正規行列\Leftrightarrow \exists Q(ユニタリ行列)を用いて対角化可能:Q^{\ast}AQ=
+    \begin{pmatrix}
+      {\lambda}_1 &\ &0\\
+      \ &\ddots&\ \\
+      \ &\ &{\lambda}_n
+    \end{pmatrix}
+  \end{equation}
+\end{itembox}
+
+$\Leftarrow$を示す．対角行列を$D$とすると$DD^{\ast}=D^{\ast}D$であり$A=QDQ^{\ast}$だから$A^{\ast}={(QDQ^{\ast})}^{\ast}={Q^{\ast}}^{\ast}D^{\ast}Q^{\ast}=QD^{\ast}Q^{\ast}$なので計算すれば$AA^{\ast}=A^{\ast}A$が示せる．
+
+$\Rightarrow$は$A$のSchur分解すると対角行列となることを示せば十分．
+\begin{itembox}[l]{Schur分解}
+  (正規とは限らない)$A$に対して$\exists Q(ユニタリ):Q^{\ast}AQ$（Schur分解）したものは上三角行列で対角要素は$A$の固有値になる．
+\end{itembox}
+\begin{proof}
+帰納法による.$Ax_1 ={\lambda}_1 x_1 \ \ \ \normsuffix{x_1}{}=1$ととる．このとき$Q=(x_1 |U)$とする．$U^{\ast}x_1 =0(Uの各列はx_1 と直交しているので)$
+\begin{equation}
+  AQ=\begin{array}{|c|c|}
+    \hline
+    \lambda x_1&AU\\\hline
+\end{array}
+\end{equation}
+なので
+\begin{align}
+  Q^{\ast}AQ=
+  \begin{pmatrix}
+    {x_1}^{\ast}\\
+    U^{\ast}
+  \end{pmatrix}A(x_1 |U)&=\begin{pmatrix}
+    {x_1}^{\ast}\\
+    U^{\ast}
+  \end{pmatrix}({\lambda}_1 x_1 |AU)\\
+  &=
+  \begin{pmatrix}
+    {x_1}^{\ast}\lambda x_1 & {x_1}^{\ast}AU\\
+    U^{\ast}{\lambda}_1 x_1 &U^{\ast}AU
+  \end{pmatrix}\\
+  &=
+  \begin{array}{|c|c|}
+    \hline
+    {\lambda}_1 &{x_1}^{\ast}AU\\\hline
+    0&U^{\ast}AU\\\hline
+  \end{array}
+\end{align}
+最後に$\normsuffix{x}{}=1およびU^{\ast}x_1 =0$を用いた．これより左下の成分は0であり繰り返せば上三角行列になることが示される．
+\end{proof}
+$A$が正規行列($A^{\ast}A=AA^{\ast}$)ならばSchur分解した$Q^{\ast}AQ=R$の$R$も正規である($R^{\ast}R=RR^{\ast}$)(計算すると$RR^{\ast}=R^{\ast}R=Q^{\ast}AA^{\ast}Q$になるので)．したがって$RR^{\ast}=R^{\ast}R$を書き下すと
+\begin{equation}
+  \begin{array}{|ccc|}
+    \hline
+    r_{11}&\cdots&r_{1n}\\
+    &&\\
+    0&&r_{nn}\\\hline
+  \end{array}\
+  \begin{array}{|ccc|}
+    \hline
+    \conjugate{r_{11}}&&0\\
+    \vdots&&\\
+    \conjugate{r_{1n}}&&\conjugate{r_{nn}}\\\hline
+  \end{array}=
+  \begin{array}{|ccc|}
+    \hline
+    \conjugate{r_{11}}&&0\\
+    \vdots&&\\
+    \conjugate{r_{1n}}&&\conjugate{r_{nn}}\\\hline
+  \end{array}\
+  \begin{array}{|ccc|}
+    \hline
+    r_{11}&\cdots&r_{1n}\\
+    &&\\
+    0&&r_{nn}\\\hline
+  \end{array}
+\end{equation}
+上の式で(1,1)成分を取り出すと${\normsuffix{r_{11}}{}}^2 +\cdots +{\normsuffix{r_{1n}}{}}^2 = {\normsuffix{r_{11}}{}}^2$になるので${\normsuffix{r_{12}}{}}^2 + \cdots +{\normsuffix{r_{1n}}{}}^2 =0$である．したがって$R$は対角行列である．
+\subsection{いろいろな分解}
+\begin{align}
+  &Aがn\times n行列\Leftrightarrow\exists Q(ユニタリ行列)についてQ^{\ast}AQ=上三角行列({\mathrm{Schur}}分解)\\
+  &Aが正規行列\Leftrightarrow\exists Q(ユニタリ行列)についてQ^{\ast}AQ=
+  \begin{pmatrix}
+    {\lambda}_1 &&\\
+    &\ddots&\\
+    &&{\lambda}_n
+  \end{pmatrix}(固有値分解)\\
+  &Aのn個の固有ベクトルが独立\Leftrightarrow\exists X(正則)について\inverse{X}AX=
+  \begin{pmatrix}
+    {\lambda}_1 &&\\
+    &\ddots&\\
+    &&{\lambda}_n
+  \end{pmatrix}\\
+  &AがHermite行列(実対称)\Leftrightarrow\exists Q(ユニタリ行列)についてQ^{\ast}AQ=
+  \begin{pmatrix}
+    {\lambda}_1 &&\\
+    &\ddots&\\
+    &&{\lambda}_n
+  \end{pmatrix}(固有値は実数)
+\end{align}
+\subsection{Sylvester標準形}
+\subsubsection{定義}
+正則行列$S$を用いてSylvester標準形は以下のように定義される．
+\begin{equation}
+  A:\mathrm{Hermite}行列に対して\exists S(正則行列)を用いてS^{\ast}AS=
+  \begin{array}{|c|c|}
+    \hline
+    \begin{array}{cccccc}
+      1&&&&&0\\
+      &1&&&&\\
+      &&1&&&\\
+      &&&1&&\\
+      &&&&-1&\\
+      0&&&&&-1
+    \end{array}&0\\\hline
+    0&0\\\hline
+  \end{array}
+\end{equation}
+1の個数を$s$,-1の個数を$t$とすると$s+t=\mathrm{rank}A$である．
+\begin{itembox}[l]{ Sylvesterの慣性則}
+$(s,t,n-s-t)$をSylvesterの符号指数と定義すると,
+$S^{\ast}AS(Sは正則)$の形の変換で符号指数が変わらない．
+\end{itembox}
+\subsubsection{作り方}
+固有値分解して$U^{\ast}AU=
+\left( \begin{array}{c|c}
+  \begin{array}{cccccc}
+    {\lambda}_1&&&&&0\\
+    &\ddots&&&&\\
+    &&{\lambda}_s&&&\\
+    &&&{\lambda}_{s+1}&&\\
+    &&&&\ddots&\\
+    0&&&&&{\lambda}_{n}
+  \end{array}&0\\\hline
+  0&0
+\end{array}\right)$となったとき(${\lambda}_1 \cdots {\lambda}_s >0\ \ \ {\lambda}_{s+1}\cdots {\lambda}_n <0$)以下のように$S$を定めると$S^{\ast}AS$はSylvester標準形になる．
+\begin{equation}
+  S=
+  \left( \begin{array}{c|c}
+    \begin{array}{ccc}
+      1/\sqrt{{\lambda}_1}&&\\
+      &\ddots&\\
+      &&1/\sqrt{{\lambda}_n}
+    \end{array}&0\\\hline
+    0&
+    \begin{array}{ccc}
+      1&&\\
+      &\ddots&\\
+      &&1
+    \end{array}
+  \end{array}\right)
+\end{equation}
+
+\subsection{特異値分解}
+正方行列は場合によっては対角化できたが，正方行列でない行列でも対角化のようなことがしたい．そのようなときは特異値分解を行う．
+
+$m\times n$行列$A$について直交行列(転置行列と逆行列が等しい)$U(m\times m),V(n\times n)$をとってくると
+\begin{equation}
+  \transpose{U}AV=
+  \begin{array}{c|c}
+    \begin{array}{ccc}
+      {\sigma}_1 &&\\
+      &\ddots&\\
+      &&{\sigma}_r
+    \end{array}&0\\\hline
+    0&0
+  \end{array}=\Sigma
+\end{equation}
+ここで$r=\mathrm{rank}A$であり$\Sigma$は特異値行列である．
+\begin{align}
+  &A=U\Sigma\transpose{V}\\
+  &\transpose{A}=V\transpose{\Sigma}\transpose{U}\\
+  &A\transpose{A}=U(\Sigma\transpose{\Sigma})\transpose{U}\\
+  &\Sigma\transpose{\Sigma}(m\times m)=
+  \begin{array}{|c|c|}
+    \hline
+    \begin{array}{ccc}
+      {{\sigma}_1}^2 &&\\
+      &\ddots&\\
+      &&{{\sigma}_r}^2
+    \end{array}&0\\\hline
+    0&0\\\hline
+  \end{array}
+\end{align}
+\begin{align}
+  Uの列ベクトルは&A\transpose{A}の固有ベクトル\\
+  {{\sigma}_j}^2は&A\transpose{A}の固有値\\
+  Vの列ベクトルは&\transpose{A}Aの固有ベクトル\\
+  {{\sigma}_j}^2は&\transpose{A}Aの固有値
+\end{align}
+\subsection{Jordan標準形}
+\subsubsection{はじめに}
+$A=\fourmatrix{0}{1}{0}{0}\ \ \ B=\fourmatrix{0}{0}{0}{0}$とする．
+\begin{align}
+  \to&\trace{A}=\trace{B}\\
+  &\det{A}=\det{B}\\
+  &{\lambda}_j (A)={\lambda}_j (B)
+\end{align}
+
+しかし，正則行列$S$をとってきても$\inverse{S}AS=B$とはこの場合できない$\to$Jordan標準形が$A$と$B$で違う．
+\subsubsection{Jordan標準形}
+Jordan細胞を以下のように$k\times k$行列で固有値$\lambda$の右横だけ成分が1の行列として定義する．
+\begin{equation}
+  J_k (\lambda )=\fbox{
+  $\begin{array}{ccccc}
+    \lambda&1&&&0\\
+    &\lambda&1&&\\
+    &&&\ddots&\\
+    &&&&1\\
+    0&&&&\lambda
+  \end{array}$}
+\end{equation}
+
+$n\times n$行列$A$のJordan標準形は
+
+\begin{equation}
+  \inverse{S}AS=\left( \begin{array}{cccc}
+    \elementinbox{J_{k_1}({\lambda}_1 )}&&&0\\
+    &\elementinbox{J_{k_2}({\lambda}_2 )}&&\\
+    &&\ddots&\\
+    0&&&\elementinbox{J_{k_l}({\lambda}_l )}
+  \end{array}\right)=J
+\end{equation}
+ここで$k_1 +k_2 +\cdots +k_l =n$であり${\lambda}_1 \cdots {\lambda}_l$は$A$の固有値
+\begin{itemize}
+  \item[(1)]$l$は線形独立な固有ベクトルの数\\
+  \item[(2)]$A$が対角化可能$\Leftrightarrow l=n$\\
+  \item[(3)]$\lambda$に対する$J_{k_i}({\lambda} )$の数=$\lambda$の幾何学的重複度\\
+  \item[(4)]$\lambda$に対する$k_i$の和=$\lambda$の代数的重複度\\
+  \item[(5)]$J_{k_i}({\lambda} )$のサイズは$J-\lambda\unitmatrix$のべき乗からわかる．
+\end{itemize}
+\subsubsection{Jordan標準形の性質の例}
+\begin{equation}
+  J=
+  \begin{array}{|cccc|}
+    \hline
+    \begin{array}{|ccc|}
+      \hline
+      2&1&\\
+      &2&1\\
+      &&2\\\hline
+    \end{array}&&&\\
+    &
+    \begin{array}{|cc|}
+      \hline
+      2&1\\
+      &2\\\hline
+    \end{array}&&\\
+    &&\begin{array}{|cc|}
+      \hline
+      2&1\\
+      &2\\\hline
+    \end{array}&\\
+    &&&2\\\hline
+  \end{array}
+\end{equation}
+
+\begin{equation}
+  J_k (0) =
+  \left(
+  \begin{array}{ccccc}
+    0&1&&&\\
+    &0&1&&\\
+    &&&\ddots&\\
+    &&&&1\\
+    &&&&0
+  \end{array}\right) は\mathrm{nilpotent}(ある正の整数nに対して{(J_k (0))}^n =0になること)
+\end{equation}
+\begin{align}
+  &J-2\unitmatrix = \left(
+  \begin{array}{cccc}
+    J_3 (0)&&&\\
+    &J_2 (0)&&\\
+    &&J_2 (0)&\\
+    &&&0
+  \end{array}\right)=
+  \left(\begin{array}{cccccccc}
+    0&1&0&0&0&0&0&0\\
+    0&0&1&0&0&0&0&0\\
+    0&0&0&0&0&0&0&0\\
+    0&0&0&0&1&0&0&0\\
+    0&0&0&0&0&0&0&0\\
+    0&0&0&0&0&0&1&0\\
+    0&0&0&0&0&0&0&0\\
+    0&0&0&0&0&0&0&0\\
+  \end{array}\right)\\
+  &{(J-2\unitmatrix)}^2 =
+  \left(\begin{array}{cccccccc}
+    0&0&1&0&0&0&0&0\\
+    0&0&0&0&0&0&0&0\\
+    0&0&0&0&0&0&0&0\\
+    0&0&0&0&0&0&0&0\\
+    0&0&0&0&0&0&0&0\\
+    0&0&0&0&0&0&0&0\\
+    0&0&0&0&0&0&0&0\\
+    0&0&0&0&0&0&0&0\\
+  \end{array}\right)\\
+  &{(J-2\unitmatrix)}^3=0
+\end{align}
+
+Jordan標準形の性質を適用していくと
+\begin{itemize}
+  \item ${(J-2\unitmatrix)}^3 =0\to$最大ブロックの次数は3\\
+  \item $\rank{{(J-2\unitmatrix)}^2}=1\to$次数3のブロックの数は1個\\
+  \item $\rank{J-2\unitmatrix}=4\to 4=\underbrace{2}_{次数3のランク}\times\underbrace{1}_{次数3の個数}+\underbrace{1}_{次数2のランク}\times \underbrace{2}_{次数2の個数がわかる}$\\
+  \item $J$の次数は8$\to 8=3\times 1+2\times 2+1\times \underbrace{1}_{次数1の個数がわかる}$
+\end{itemize}
+\subsubsection{Jordan標準形の利用}
+常微分方程式の解法に利用できる．
+\begin{equation}
+  \begin{cases}
+    \dot{x}(t)=Ax\\
+    x(0)=x_0
+  \end{cases}
+\end{equation}
+
+$A(n\times n)$のJordan標準形を$J$とすると正則行列$S$を用いて$A=SJ\inverse{S}$
+\begin{equation}
+  \begin{cases}
+    \dot{y}(t)=Jy(t)\\
+    y(0)=y_0
+  \end{cases}\ \ \
+  \begin{cases}
+    x(t)=Sy(t)\\
+    y_0 = \inverse{S}x_0
+  \end{cases}
+\end{equation}
+
+$J$が対角行列なら以下のように簡単に解ける．
+\begin{align}
+  &\dot{y_l}(t)={\lambda}_i y_i (t)(i=1,2\cdots n)\\
+  &y_i (t)=y_i (0)e^{{\lambda}_i t}
+\end{align}
+
+$J$が対角でない場合$J=J_n (\lambda )$だとする．
+
+最後の行について$\dot{y_n}(t)=\lambda y_n (t)よりy_n (t)=y_n (0)e^{\lambda t}$となる．
+\begin{align}
+  &\dot{y_{n-1}}(t)=\lambda y_{n-1}(t)+y_n (0)e^{\lambda t}\\
+  &y_{n-1}(t) = y_{n-1}(0)+y_n (0)t e^{\lambda t}
+\end{align}
+最後は特殊解求めるやつをつかう．
+

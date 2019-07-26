@@ -1,32 +1,31 @@
 \documentclass[dvipdfmx, fleqn, uplatex,a4paper]{jsarticle}
-\input{preambles/preamble}
 
 \usepackage{mymacro}%自作のマクロ集める
-\newtheorem{dfn}{定義}
-\newtheorem{thm}{定理}
 \usepackage{here}
 \usepackage{slashbox}
-
+\input{preambles/preamble}
+\newtheorem{thm}{定理}
+\newtheorem{lem}{補題}
+\newtheorem{dfn}{定義}
 \makeatletter
   \renewcommand{\theequation}{\arabic{section}.\arabic{subsection}.\arabic{equation}}
   \@addtoreset{equation}{section}
 \makeatother
-
-
 \title{線形数理要論}
-\author{H.Karino}
+\author{Hidekazu Karino\\
+Shun Arahata}
 \begin{document}
 \maketitle
 \tableofcontents
 \newpage
-\input{sections/0413}
-\input{sections/0420}
-\input{sections/0427}
-\input{sections/0511}
-\input{sections/0518}
-\input{sections/0608}
-\input{sections/0615}
-\input{sections/0622}
-\input{sections/0629}
-\input{sections/0713}
+\input{sections/1_matrix_and_determinant.tex}
+\input{sections/2_rank.tex}
+\input{sections/3_eigenvalue.tex}
+\input{sections/40_normal_form.tex}
+\input{sections/41_graph_and_matrix.tex}
+\input{sections/5_nonnegative_matrix}
+\input{sections/6_integer_matrix}
+\input{sections/7_LP}
+\input{sections/8_linear_system}
+\input{sections/exam}
 \end{document}

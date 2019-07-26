@@ -1,0 +1,183 @@
+\section{固有値}
+\subsection{正定値性}
+$n\times m$行列$A$について$Ax=\lambda x,\ \ \ (x\neq 0)$とすると$\det (A-\lambda\unitmatrix )=0$であり実行列の固有値は実数とは限らない．
+
+正定値性について述べる．実行列$A$について定義より$A$が対称行列なら$\transpose{A}=A$であり，$A$の二次形式は$\transpose{x}Ax=\displaystyle\sum_{i=1}^n \sum_{j=1}^n a_{ij}x_i x_j$である．
+\begin{itembox}[l]{正定値，半正定値}
+\begin{align}
+  &A(対称行列)が正定値\Leftrightarrow \forall x\neq 0\ \ \ \transpose{x}Ax>0\\
+  &A(対称行列)が半正定値\Leftrightarrow \forall x\neq 0\ \ \ \transpose{x}Ax\geq 0
+\end{align}
+\end{itembox}
+
+固有値については
+\begin{align}
+  &A(対称行列)が正定値\Leftrightarrow すべての固有値>0\\
+  &A(対称行列)が半正定値\Leftrightarrow すべての固有値\geq 0
+\end{align}
+
+行列式については半正定値の場合同値関係が成り立たないことに注意．例えば$A=\fourmatrix{0}{0}{0}{-1}$は半正定値でないが首座小行列式$\geq 0$
+\begin{align}
+  &A(対称行列)が正定値\Leftrightarrow すべての首座小行列式>0\\
+  &A(対称行列)が半正定値\Rightarrow すべての首座小行列式\geq 0\\
+  &A(対称行列)が半正定値\Leftrightarrow すべての主小行列式\geq 0
+\end{align}
+\subsection{Gershgorinの定理}
+固有値の範囲を知りたいときに使う定理．
+\begin{itembox}[l]{Gershgorinの定理}
+  $n\times n$正方行列$A=(a_{ij})(a_{ij}\in\mathbb{C})$の各$i$について非対角成分の絶対値の和を$R_i$と書く．つまり$R_i =\sum_{j\neq i}|a_{ij}|$.$a_{ii}$を中心とし半径$R_i$の円板をゲルシュゴリン円板とすると$A$のすべての固有値は少なくとも一つのゲルシュゴリン円板に含まれる．
+\end{itembox}
+\begin{proof}
+  $Ax=\lambda x\ \ \ x\neq 0$のとき
+  \begin{equation}
+      \sum_{j=1}^n a_{kj}x_j =\lambda x_k\quad  (k=1,2,\cdots n)
+  \end{equation}
+  このとき$|x_i |=\max_{k} |x_k|$となる$i$を選ぶ.$k=i$をみると
+  \begin{equation}
+  \sum_{j\neq i}^n a_{ij}x_j =(\lambda -a_{ii}) x_i     
+  \end{equation}
+  したがって絶対値をとれば
+  \begin{equation}
+  \sum_{j\neq i}^n |a_{ij}| |x_j | =(|\lambda -a_{ii}|) |x_i|    
+  \end{equation}
+ \end{proof}
+\subsection{Gershgorinの定理の応用例}
+\begin{enumerate}
+    \item $A$のスペクトラム半径
+    \item $A$が狭義に優対角ならば正則
+    \begin{align}
+        |a_{ii}| &> \sum_{j \neq i} |a_{ij}|\\
+        \Rightarrow 0 &\not \in D_i
+    \end{align}
+\end{enumerate}
+\subsection{Rayleigh商の公式}
+$A$を実対象$n$次対称行列
+\begin{itembox}[l]{Rayleigh商の公式}
+  \begin{align}
+    &{\lambda}_{\max}=\max \displaystyle\frac{\transpose{x}Ax}{\transpose{x}x}\\
+    &{\lambda}_{\min}=\min \displaystyle\frac{\transpose{x}Ax}{\transpose{x}x}
+  \end{align}
+\end{itembox}
+\subsection{Courant Fisherの定理}
+$A$を実対象$n$次対称行列
+\begin{itembox}[l]{Courant Fisherの定理}
+  \begin{equation}
+      \lambda_r = \max_{\mathrm{dim}S = r}
+      \min_{x\in S (x\neq 0)}\frac{x^TAx}{x^Tx}
+  \end{equation}
+\end{itembox}
+\begin{proof}
+3ステップで構成される．
+$A$の固有値を${\lambda}_1 \geq {\lambda}_2 \geq \cdots \geq {\lambda}_n$,それぞれの正規固有ベクトルを$z_1 ,z_2 ,\cdots z_n$部分空間$U_r ={\mathrm{span}}\{ z_1 ,z_2 ,\cdots z_r\},V_r = {\mathrm{span}}\{ z_r ,z_{r+1},\cdots z_n\}$
+
+ステップ1.$S=U_r$として$x\in U_r$をとる．$x=\displaystyle\sum_{i=1}^r c_i z_i$であり
+\begin{equation*}
+  \displaystyle\frac{\transpose{x}Ax}{\transpose{x}x}=\frac{\transpose{x}\lambda x}{\transpose{x}x}=\frac{\sum {\lambda}_i {c_i}^2}{\sum {c_i}^2}
+\end{equation*}
+
+左辺の最小値は右辺の最小値でありこれは$c_r =1$で他はすべて0の時最小値${\lambda}_r$をとる．
+
+ステップ2.
+\begin{equation*}
+  {\lambda}_r =\min_{x\in U_r}\displaystyle\frac{\transpose{x}Ax}{\transpose{x}x}\leq 
+  \max_{\substack{S\\ \text{dim}S=r}}\min_{x\in S}\frac{\transpose{x}Ax}{\transpose{x}x}
+\end{equation*}
+
+ステップ3.任意の$S(\dim S=r)$について$\dim (S\cap V_r )\geq 1$なので$\exists x\neq 0\ \ \ x\in S\cap V_r$
+
+$x\in S\cap V_r$ととる．$x=\displaystyle\sum_{i=r}^n c_i z_i$であり
+\begin{equation*}
+  \displaystyle\frac{\transpose{x}Ax}{\transpose{x}x}=\frac{\sum_{i=r}^n {\lambda}_i {c_i}^2}{\sum_{i=r}^n {c_i}^2}\leq {\lambda}_r
+\end{equation*}
+
+最後はステップ1の時と同様．したがって
+\begin{equation*}
+  {\lambda}_r \geq \displaystyle\frac{\transpose{x}Ax}{\transpose{x}x}\geq \min_{y\in S}\frac{\transpose{y}Ay}{\transpose{y}y}
+\end{equation*}
+
+いま$S$は任意の$\dim S=r$を選んだので
+\begin{equation}
+    {\lambda}_r \geq \max_{\substack{S\\ \text{dim}S=r}}\min_{x\in S}\frac{\transpose{x}Ax}{\transpose{x}x}
+\end{equation}
+\end{proof}
+\subsection{半正定値と固有値}
+\begin{itembox}[l]{２つの行列の関連}
+  $A$, $B$次対称,行列とする.
+  \begin{enumerate}
+      \item $S$が正則行列のとき,
+      \begin{equation}
+          A \preceq B \Leftrightarrow S^T A S \preceq S^TBS
+      \end{equation}
+      \item $A\preceq B$ならば
+      \begin{equation}
+          \lambda_k(A) \leq \lambda_k(B)
+      \end{equation}
+  \end{enumerate}
+\end{itembox}
+
+
+\subsection{標準固有値問題}
+\begin{table}[H]
+  \centering
+  \begin{tabular}{cc}
+    標準固有値問題&$Ax=\lambda x\ \ \ (x\neq 0)$\\
+    一般化固有値問題&$Ax=\lambda Gx\ \ \ (x\neq 0)$
+  \end{tabular}
+\end{table}
+ただし一般化固有値問題において$G$は正定値対称行列である．
+\subsection{線形空間と双対空間}
+線形空間$V$上の線形写像$f$とは，$f:V\to \realnspace{1}$であって以下を満たすものである．
+\begin{equation}
+  \begin{cases}
+    f(x+y) = f(x)+f(y)&\forall x,y\in V\\
+    f(\alpha x) = \alpha f(x) & \forall\alpha\in\realnspace{1},\forall x\in V
+  \end{cases}
+\end{equation}
+\begin{itembox}[l]{双対空間}
+  $V$の双対空間$V^{\ast}$とは以下のように$V$上の線形写像全体のなす集合である．
+  \begin{equation}
+    V^{\ast} = \{ f:V\to\realnspace |fは線形写像\}
+  \end{equation}
+\end{itembox}
+
+双対性を表す内積として以下のように$<,>$をもちいる．
+\begin{equation}
+  x\in V,\ \ \ f\in V^{\ast}のとき\ \ \ f(x) =\pairing{f}{x}
+\end{equation}
+各$x\in V$に対して
+\begin{align}
+  &{\phi}_x :V^{\ast}\to\realnspace{1}\ \ \ (f\in V^{\ast},\pairing{f}{x}\in\realnspace{1})\\
+  &{\phi}_x (f)=\pairing{f}{x}\\
+  &{\phi}_x \in V^{\ast\ast}\ \ \ ({(V^{\ast})}^{\ast}=V^{\ast\ast}とかく)
+\end{align}
+
+このとき$V\to V^{\ast\ast}(x\in V,{\phi}_x \in V^{\ast\ast})$を考えると$V\subseteq V^{\ast\ast}$で一般には$V\neq V^{\ast\ast}$
+\begin{align}
+  &Vが有限次元空間のとき
+  \begin{cases}
+    V\simeq \realnspace{n}\\
+    V^{\ast}\simeq\realnspace{n}\\
+    V^{\ast\ast}\simeq\realnspace{n}
+  \end{cases}\\
+  &Vがノルム空間のとき
+  \begin{cases}
+    V^{\ast}は\mathrm{Banach}空間\\
+    V^{\ast\ast}も\mathrm{Banach}空間\\
+    でもV^{\ast\ast}\simeq Vとは限らない
+  \end{cases}\\
+  &Vが\mathrm{Hilbert}空間\Rightarrow V\simeq V^{\ast}\simeq V^{\ast\ast}
+\end{align}
+ここでノルム空間はノルムが定義されたベクトル空間，Banach空間は完備なノルム空間,Hilbert空間はユークリッド空間の拡張である．
+\subsection{pairingと内積}
+\begin{table}[H]
+  \centering
+  \begin{tabular}{cc}
+    $\pairing{f}{x}$&$\pairing{}{}:V\times V^{\ast}\to\realnspace{1}$\\
+    ${(x,y)}_G$&$(,):V\times V\to \realnspace{1}$
+  \end{tabular}
+\end{table}
+ここで正定値対称行列$G:V\to V^{\ast}$を用いると
+\begin{align}
+  {(x,y)}_G &= \pairing{x}{Gx}\\
+  \normsuffix{x}{G}&=\sqrt{\pairing{x}{Gx}}
+\end{align}

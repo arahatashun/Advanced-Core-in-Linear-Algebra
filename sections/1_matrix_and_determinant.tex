@@ -1,14 +1,11 @@
-\newcommand{\fourmatrix}[4]{\begin{pmatrix}
-  #1 & #2 \\
-  #3 & #4
-\end{pmatrix}}
 \section{行列と行列式}
-\subsection{行列式の定義}
-正方行列$A(n\times n行列)=(a_{ij})$について行列式の定義は以下．
+\begin{itembox}[l]{行列式の定義}
+正方行列$A(n\times n行列)=(a_{ij})$について
 \begin{equation}
   \det{A}=\displaystyle\sum_{\sigma\in {\&}_n}\sign (\sigma )\prod_{i=1}^n a_{i \sigma (i)}
 \end{equation}
 ここで${\&}_n$は$n!$個の置換，$\sign (\sigma )={(-1)}^{交差数}$
+\end{itembox}
 \subsection{行列式の定義からわかること}
 $A=[a_1 ,a_2 ,\cdots a_n ]$列ベクトルで見ることにする．$a_i$ は$i$次元縦ベクトル
 \begin{itemize}
@@ -21,7 +18,6 @@ $A=[a_1 ,a_2 ,\cdots a_n ]$列ベクトルで見ることにする．$a_i$ は$i
   \item[7] $\det (a_1 ,a_2 ,\cdots a_k +\lambda a_l \cdots a_n )=\det A(\because 3,6)列基本変形について不変$\\
   \item[8] $\det (AB)=\det A\det B$\\
   \item[9] $\det \fourmatrix{A}{0}{B}{C}=\det A\det C$\\
-  \item[10] $\det \fourmatrix{A}{0}{I}{B}=\det\fourmatrix{I}{A}{0}{I}\fourmatrix{-AB}{0}{0}{I}\fourmatrix{I}{0}{B}{I}\fourmatrix{0}{I}{I}{0} \det (AB)=\det (-AB){(-1)}^n$
 \end{itemize}
 \subsection{Cramerの公式}
 正方行列$A(n\times n)$について$Ax=b$の公式．
@@ -63,12 +59,30 @@ $\det Aの第q列の展開配下のようになる$
 \end{align}
 証明は余因子行列と行列式で検索する．
 \subsection{行列式に関する定理}
-\subsubsection{行列式の恒等式}
+\subsubsection{schur complement}
+\begin{itembox}[l]{schur complement}
+行列 $A, B, C, D$ のサイズをそれぞれ
+$p\times p, p\times q, q \times p, q \times q$とする．
+$A$が正則行列ならば
 \begin{equation}
-  正則行列Aについて\det\fourmatrix{A}{B}{C}{D}=\det A\det (D-C\inverse{A}B)
+ \det\fourmatrix{A}{B}{C}{D}=\det A\det (D-C\inverse{A}B)
 \end{equation}
-証明は以下の恒等式を見れば明らか
+\end{itembox}
+\begin{proof}
 \begin{equation}
   \fourmatrix{I}{0}{-C\inverse{A}}{I}\fourmatrix{A}{B}{C}{D}=\fourmatrix{A}{B}{0}{D-C\inverse{A}B}
 \end{equation}
+\end{proof}
 \subsubsection{Binet-Cauchyの公式}
+\begin{itembox}[l]{Binet-Cauchyの式}
+$m\leq n$,$S$を要素数($|S| = m$)の
+$\{1,\cdots,n\}$の部分集合．
+\begin{align}
+    A_S &:\text{$A(m\times n)$の$n$個の列から$S$に含まれる添字の列}\\
+    B^S &:\text{$B(n \times m)$の$n$個の行から$S$に含まれる添字の行}
+\end{align}
+\begin{equation}
+    \det(AB) = \sum_{\substack{S \subset [n]\\
+    |S| = m}} \det(A_S) \det(B^S)
+\end{equation}
+\end{itembox}

@@ -1,0 +1,339 @@
+\section{整数行列}
+$A=(a_{ij})\ \ \ a_{ij}\in\mathbb{Z}$\ \ \ いま$Ax=b$を解くことを考える．
+\begin{align}
+  &{}^{\exists}x\in\realnspace{n}\Rightarrow \rank{[A|b]}=\rank{A}\\
+  &{}^{\exists}x\in{\mathbb{Z}}^n \Rightarrow \text{答えは整数であるか？}
+\end{align}
+\subsection{単模行列(Unimodular行列)}
+\begin{dfn}
+  $Q:n\times n$整数行列が単模行列$\Leftrightarrow\det Q\in \{1,-1\}$
+\end{dfn}
+\begin{dfn}
+  $Q:n\times n$整数行列が完全単模行列$\Rightarrow Q$は任意の正方部分行列$C$について$\det C\in {0,1,-1}$
+\end{dfn}
+\begin{itembox}[l]{
+$Q:$整数行列の時以下はすべて同値．}
+\begin{itemize}
+  \item[(1)]$Q$が単模行列
+  \item[(2)]$Q^{-1}$が整数行列
+  \item[(3)]$Qx$が整数ベクトル$ \Leftrightarrow x$が整数ベクトル
+  \item[(4)]$Q$が整数行列に対する列基本変形を表す行列の積
+  \item[(5)]$Q$が整数行列に対する行基本変形を表す行列の積
+\end{itemize}
+\end{itembox}
+\begin{itemize}
+  \item[(1)$\to$(2)]$Q^{-1}=\displaystyle\frac{余因子行列}{\det Q}$\\
+  \item[(2)$\to$(1)]$QQ^{-1}=I$の行列式を考えて$\det Q\det Q^{-1}=1$\ \ \ いま$Q^{-1}$が整数行列なので$\det Q^{-1}\in\mathbb{Z}$から$\det Q=1,-1$\\
+  \item[(2)$\to$(3)]$Qx\in{\mathbb{Z}}^n $について$y=Qx$とおくと$x=Q^{-1}y\in{\mathbb{Z}}^n$
+\end{itemize}
+
+$\realnspace{1}$の場合の列基本変形は
+\begin{itemize}
+  \item ある列を$\alpha$倍
+  \item 2つの列を入れ替える
+  \item ある列$\times\alpha$を他の列に加える
+\end{itemize}
+
+\hypertarget{basictrans}{$\mathbb{Z}$}の場合は
+\begin{itemize}
+  \item ある列を-1倍
+  \item 2つの列を入れ替える
+  \item ある列の整数倍を他の列に加える
+\end{itemize}
+(4)(5)については後ほど
+\subsection{Hermite標準形}
+与えられた整数行列を整数基本列変形によって
+できるだけ簡単な形に変換することを考える．
+Hermite標準形は一意．
+\begin{itembox}[l]{Hermite標準形}
+$A:(m\times n)$整数行列，$\rank A = m$.
+ある単模行列$Q$が存在して
+\begin{equation}
+  AQ=
+  \begin{pmatrix}
+    \begin{array}{ccc|}
+      {\beta}_{11}&&0\\
+      \vdots&\ddots&\\
+      {\beta}_{m1}&&{\beta}_{mn}
+    \end{array}0
+  \end{pmatrix}
+\end{equation}
+\begin{enumerate}
+    \item 下三角${\beta}_{ij}=0(i<j)$
+    \item 非負${\beta}_{ij}\geq 0,{\beta}_{ii}>0$
+    \item 行方向に見たときに対角項が最大${\beta}_{ii}>{\beta}_{ij}(i>j)$
+\end{enumerate}
+つまり
+非負の要素からなる左下三角行列で，各行にお
+いて.対角要素が非対角要素よりも大きいような整数行列である．
+列基本変形を繰り返すことで，
+Hermite標準形をつくることができる．
+\end{itembox}
+\begin{thm}
+  任意の単模行列は列基本変形の積
+\begin{proof}
+単位行列$I$に列基本変形を施して$A$になるならば$A$は単模行列(列基本変形は$\det$を符号以外変えない)．
+\end{proof}
+\end{thm}
+また実は単模行列に列基本変形を施せばHermite標準形になることを示す．
+
+一つの行に着目する: $
+\begin{array}{|c|}
+  \hline
+  a_1 a_2 \cdots a_n\\\hline
+\end{array}
+$，$a_i$はスカラー．
+\begin{itemize}
+  \item[1]いくつかの列を-1倍して$a_1 \cdots a_n \geq 0$とする．
+  \item[2]列を入れ替えて$a_1 \geq a_2 \geq \cdots a_n \geq 0$とする．\\
+  このとき$a_1 >0$である，なぜなら$a_1 =0$だとすべての行が0で行フルランクに反してしまうから．
+  \item[3]列を互いに引き算する．$a_i = a_j q_i +r_i (a_i \geq a_j でありq_i \in\mathbb{Z}>0でr_i は余り)$を計算し$a_i =r_i$にして2に戻ることを繰り返す．
+\end{itemize}
+
+もし$a_2 \neq 0$ならば$a_1 -a_2$が可能でありいつかは$a_2 =0$になる．それを他の行でも同じことをする．
+
+\subsection{\texorpdfstring{$Ax=b$の$\mathbb{Z}$} 上での可解性}
+$\mathbb{R}$ならば
+\begin{equation}
+    \mathrm{rank}[A|b] = \mathrm{rank} A
+\end{equation}
+\begin{itembox}[l]{$\mathbb{Z}$上での可解性}
+  $A:m\times n$整数行列で$\rank{A}=m$とすると以下はすべて同値である．
+\begin{enumerate}
+  \item 任意の$m$次整数ベクトル$b$に対して$Ax=b$が整数ベクトルの解$x$をもつ．
+  \item 実数ベクトル$y$について$\transpose{y}A\in{\mathbb{Z}}^n \Rightarrow y\in{\mathbb{Z}}^m$
+  \item $g_m (A)=1$　（$A$の行列式因子$g_k (A)\cdots k$次の小行列式の最大公約数）
+  
+  \item $A$のHermite標準形=$[I_m |0]$
+\end{enumerate}
+\end{itembox}
+(4)を基準に見ていく．
+
+まず(1)について．単模行列$Q$
+を用いて，
+$AQ$をHermite標準形にして
+\begin{equation}
+    Ax=b\Leftrightarrow AQ\inverse{Q}x=b
+\end{equation}
+
+先週より$x\in{\mathbb{Z}}^n \Leftrightarrow\inverse{Q}x\in{\mathbb{Z}}^n (4\to 1)$なので$A$をHermite標準形としてよい．
+
+${}^{\forall}b\in{\mathbb{Z}}^m$に対して
+\begin{equation}
+  \begin{tabular}{|c|c|}
+    \hline
+    \backslashbox{$I$}{0}&0\\
+    &\\\hline
+  \end{tabular}\
+  \begin{array}{|c|}
+    \hline
+    \\
+    x\\
+    \\\hline
+  \end{array}=
+  \begin{array}{|c|}
+    \hline
+    \\
+    b\\
+    \\\hline
+  \end{array}
+\end{equation}
+このとき$i(>1)$行目で
+\begin{equation}
+  \begin{tabular}{|cc|c|}
+    \hline
+    \backslashbox{$I$}{0}&&0\\\hline
+    &\backslashbox{a}{}&\\\hline
+    &&\\\hline
+  \end{tabular}\
+  \begin{array}{|c|}
+    \hline
+    \\
+    x\\
+    \\\hline
+  \end{array}=
+  \begin{array}{|c|}
+    \hline
+    0\\
+    \vdots\\
+    b_i\\
+    \vdots\\
+    0
+    \\\hline
+  \end{array}
+\end{equation}
+$1～i-1$行は解けて$x=
+\begin{array}{|c|}
+  \hline
+  0\\
+  \vdots\\
+  x_i\\
+  \vdots\\
+  \ast
+  \\\hline
+\end{array}\to ax_i =b_i $.任意にとれる$b_i\in\mathbb{Z}$なので$a=1$
+\\
+次に(2)についてみてみる．$\transpose{y}A\in{\mathbb{Z}}^n \Leftrightarrow\transpose{y}AQ\in{\mathbb{Z}}^n$($Q$は単模行列)なので$A$をHermite標準形としてよい．
+
+このとき(2)$\Leftrightarrow{\beta}_{11}={\beta}_{22}=\cdots{\beta}_{mm}=1$を示す．
+\begin{equation}
+\begin{pmatrix}
+    \beta_{11} &0&& \cdots& 0\\
+    \beta_{12} &\beta_{22}& 0& \cdots& 0\\
+    \cdots & && &0
+    \end{pmatrix}
+\end{equation}
+$\Leftarrow$は明らかである．
+\begin{equation}
+    A = [I_m|0] \quad y^T A = [y^T | 0]
+\end{equation}
+$\Rightarrow{\beta}_{ii}\neq 1$となる最初の行($k$行)に注目する．
+
+\begin{align*}
+  &A=
+  \begin{tabular}{|cc|c|}
+    \hline
+    \backslashbox{$I$}{0}&&0\\\hline
+    &\backslashbox{${\beta}_{k1}{\beta}_{k2}\cdots$ ${\beta}_{kk}$}{}&\\\hline
+    &&\\\hline
+  \end{tabular}\\
+  &\transpose{y}=
+  \begin{array}{|c|c|c|c|c|}
+    \hline
+    -{\beta}_{k1}/{\beta}_{kk}&-{\beta}_{k2}/{\beta}_{kk}&\cdots&1/{\beta}_{kk}&0\\\hline
+  \end{array}
+\end{align*}
+とおくと$\transpose{y}A=[0,0\cdots 1,0\cdots 0]$となって$\transpose{y}A\in{\mathbb{Z}}^n$であるが$y\notin{\mathbb{Z}}^n$
+よって，$\beta_{ii} = 1$\\
+次に(3)について,
+\begin{itembox}[l]{準備}
+$g_k (A)$は$A$の$\mathbb{Z}$型の
+\hyperlink{basictrans}{列基本変形}で不変である．
+\begin{enumerate}
+    \item 列$i$を-1倍
+    \item 列$i$と列$j$を入れ替える
+    \item 列$j$の整数倍を列$i$に加える
+\end{enumerate}
+$A$に対して$\alpha=1～k$列の小行列式で$\beta=1～k-1,j$列の小行列式
+とする．$A$の$j$列を$i$列に加えて$A'$とする．
+$A'$に対して$1～k-1,j$列の小行列式 $=\beta' = \beta $，$1～k$列の小行列式を$a'$とする．\\
+$A'$の$1～k$列の小行列式のLaplace展開を考えると
+\begin{align}
+   &\text{ ($a_i$に関する展開)+($a_j$に関する展開)}\\
+   & = \alpha + \beta\\
+   & = \alpha'
+\end{align}
+\begin{equation}
+    \mathrm{gcd}(\alpha', \beta)
+    = \mathrm{gcd} (\alpha + \beta, \beta)
+    = \mathrm{gcd} (\alpha, \beta)
+\end{equation}
+\end{itembox}
+準備より$Q$が単模行列なら
+\begin{equation}
+g_m (A)=g_m (AQ)
+\end{equation}
+なので$A$をHermite標準形としてよい．$g_m (A)=1\Leftrightarrow{\beta}_{11}=\cdots ={\beta}_{mm}=1$
+\subsection{Smith標準形}
+Hermite標準形は列変形だけによる三角化であるが，
+列変形と行変形の両方を用いると対角行列にする
+ことができる．Smith標準形は一意に定まる．
+\begin{itembox}[l]{Smith標準形}
+$A\in{\mathbb{Z}}^{m\times n},\ \rank{A}=r,\ {}^{\exists}P,Q$を単模行列とする．
+\begin{equation}
+  PAQ=
+  \begin{array}{|c|c|}
+    \hline
+    \begin{array}{ccc}
+      {\alpha}_1&&\\
+      &\ddots&\\
+      &&{\alpha}_r
+    \end{array}&0\\\hline
+    0&0\\\hline
+  \end{array}
+\end{equation}
+$\alpha_1\leq \cdots \leq \alpha_r(r =\mathrm{rank} A)$は
+正の整数であり，$\alpha_k$が$\alpha_{k+1}$を割り切る．
+$\alpha_k$は$A$の単因子と呼ばる．
+このとき
+\begin{equation}
+    g_k (A)=g_k (PAQ)={\alpha}_1 \cdots{\alpha}_k
+\end{equation}
+\end{itembox}
+例えば$k=1$だと，
+小行列式は$\alpha_1,\cdots, \alpha_r$となるので
+\begin{equation}
+    g_1 (A) = \alpha_1
+\end{equation}
+Smith標準形の作り方を述べる．
+(整除条件を無視すると)
+まず$\min\{ |a_{ij}|:i=1\cdots m,\ j=1\cdots n\, a_{ij}\neq 0\}$なる$(i,j)$に注目して$a_{ij}$を基本変形で(1,1)にもってくる．
+次に列基本変形で$0\leq a_{1j}<a_{11} (j=2\cdots n)$とする．$a_{ij}=q_j a_{11}+r_j (q_j \in\mathbb{Z})$として${a_{ij}}^{'}=r_j$とする．$a_{ij}$を$a_{11}$で割り算して余りで更新していく．これを続けて最小($\neq 0$)になった$a_{ij}$を(1,1)にもってくる．そうするといつかは以下のようになる．
+\begin{equation}
+  \begin{array}{|cccc}
+    \hline
+    a_{11}&0&\cdots&0\\\hline
+    &&&\\
+    &&&
+  \end{array}
+\end{equation}
+
+同じことを行基本変形でも行うと以下のようになる．
+\begin{equation}
+  \begin{array}{c|ccc}
+    a_{11}&0&\cdots&0\\\hline
+    0&&&\\
+    \vdots&&a_{11}の倍数&\\
+    0&&&
+  \end{array}
+\end{equation}
+もし$a_{11}$の倍数でないなら$a_{ij}\to a_{ij}/a_{11}$の剰余ができるので．
+$a_{11}$の最小性に反する．
+(整除条件)について
+$\alpha_{i} | \alpha_{i+1}$を満たさない最小の$i$について，
+行番号と列番号が
+{$i,i+1$}の部分の
+diag($\alpha_i$,$\alpha_{i+1}$)に注目する．
+\begin{equation}
+    \alpha_i v + \alpha_{i+1} u =\mathrm{gcd}(\alpha_i,\alpha_{i+1})
+\end{equation}
+を満たす整数$u$,$v$をとり
+\begin{equation}
+    \begin{bmatrix}
+    1 & u\\
+    0 & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+    \alpha_i &0\\
+    0 & \alpha_{i+1}
+    \end{bmatrix}
+    \begin{bmatrix}
+    1 & v\\
+    0 & 1
+    \end{bmatrix}
+    = 
+    \begin{bmatrix}
+    \alpha_i & \mathrm{gcd}(\alpha_i,\alpha_{i+1})\\
+    0 & \alpha_{i+1}
+    \end{bmatrix}
+\end{equation}
+列を入れ替えてから
+\begin{equation}
+    \begin{bmatrix}
+    1 & 0\\
+    -\alpha_{i+1}/\mathrm{gcd}(\alpha_i,\alpha_{i+1}) & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+    \mathrm{gcd}(\alpha_i,\alpha_{i+1}) & \alpha\\
+    \alpha_{i+1} & 0
+    \end{bmatrix}
+    \begin{bmatrix}
+    1 & -\alpha_i/\mathrm{gcd}(\alpha_i,\alpha_{i+1}) \\
+    0 & 1
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      \mathrm{gcd}(\alpha_i,\alpha_{i+1})  & 0\\
+    0 & -\alpha_i \alpha_{i+1}/  \mathrm{gcd}(\alpha_i,\alpha_{i+1}) 
+    \end{bmatrix}
+\end{equation}
